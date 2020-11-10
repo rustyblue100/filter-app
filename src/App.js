@@ -7,7 +7,6 @@ const fetchUrl = dataJson;
 const App = () => {
   return (
     <div className="App">
-      {" "}
       <Units />
     </div>
   );
