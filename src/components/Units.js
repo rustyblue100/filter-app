@@ -32,7 +32,7 @@ const SquareFeets = [
   { sqFtLabel: "1000" },
 ];
 
-const Units = ({ combineUnits }) => {
+const Units = ({ combineUnits, level }) => {
   const classes = useStyles();
 
   const [rooms, setRooms] = useState([]);
@@ -142,41 +142,43 @@ const Units = ({ combineUnits }) => {
         alignItems="center"
       >
         {console.log(
-          filteredUnits.filter((unit) => unit.fields.level === String(11))
+          filteredUnits.filter((unit) => unit.fields.level === String(level))
         )}
-        {filteredUnits.map((u, index) => (
-          <Card
-            style={{
-              background: "lightgray",
-              marginBottom: "2px",
-              width: "400px",
-              padding: "20px",
-            }}
-          >
-            <Typography gutterBottom variant="h4">
-              {u.fields.unit}
-            </Typography>
-            <Typography gutterBottom variant="h6">
-              rooms: {u.fields.room}
-            </Typography>
-            <Typography gutterBottom variant="h6">
-              building: {u.fields.building}
-            </Typography>
-            <Typography gutterBottom variant="h6">
-              SqFt: {u.fields.area}
-            </Typography>
+        {filteredUnits
+          /*   .filter((unit) => unit.fields.level === String(level)) */
+          .map((u, index) => (
+            <Card
+              style={{
+                background: "lightgray",
+                marginBottom: "2px",
+                width: "400px",
+                padding: "20px",
+              }}
+            >
+              <Typography gutterBottom variant="h4">
+                {u.fields.unit}
+              </Typography>
+              <Typography gutterBottom variant="h6">
+                rooms: {u.fields.room}
+              </Typography>
+              <Typography gutterBottom variant="h6">
+                building: {u.fields.building}
+              </Typography>
+              <Typography gutterBottom variant="h6">
+                SqFt: {u.fields.area}
+              </Typography>
 
-            <LazyLoad height={200} once>
-              <CardMedia
-                className={classes.media}
-                image={
-                  u.fields.planpng && u.fields.planpng[0].thumbnails.large.url
-                }
-                title="Paella dish"
-              />
-            </LazyLoad>
-          </Card>
-        ))}
+              <LazyLoad height={200} once>
+                <CardMedia
+                  className={classes.media}
+                  image={
+                    u.fields.planpng && u.fields.planpng[0].thumbnails.large.url
+                  }
+                  title="Paella dish"
+                />
+              </LazyLoad>
+            </Card>
+          ))}
       </Grid>
     </Container>
   );
