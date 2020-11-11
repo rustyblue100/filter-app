@@ -1,20 +1,41 @@
 import React from "react";
+import LazyLoad from "react-lazyload";
+import { Link, useParams } from "react-router-dom";
 
-const Unit = ({ unit }) => {
+import {
+  Container,
+  Grid,
+  Card,
+  CardMedia,
+  Typography,
+  Button,
+} from "@material-ui/core";
+
+const Unit = ({ data }) => {
+  console.log(data);
+
+  const { unitNumber } = useParams();
+
+  const unitData = data.filter(
+    (unit) => unit.fields && unit.fields.unit === unitNumber
+  );
+
+  const { unit, area, planpng } = unitData[0] ? unitData[0].fields : "";
+
   return (
     <div>
-      <h2>{unit.title}</h2>
-      <h4>Room {unit.room}</h4>
-      <h4>Building {unit.building}</h4>
-      <h4>Area {unit.area}</h4>
-      <div>
+      <Link to={`/`}>
+        <Button>back</Button>
+      </Link>
+      <h1>{unit}</h1>
+      Square Ft: {area}
+      <LazyLoad height={400} once>
         <img
-          width="200"
-          alt={`The unit titled: ${unit.title}`}
-          src={unit.image_url}
+          src={planpng && planpng[0].thumbnails.full.url}
+          alt={unit}
+          width="500"
         />
-      </div>
-      <p> Publication : {unit.start_date} </p>
+      </LazyLoad>
     </div>
   );
 };

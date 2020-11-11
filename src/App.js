@@ -1,12 +1,40 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Units from "./components/Units";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Unit from "./components/Unit";
+import UnitList from "./components/UnitList";
+
+import {
+  Container,
+  Grid,
+  Card,
+  CardMedia,
+  Typography,
+  FormControl,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  TextField,
+} from "@material-ui/core";
 
 const BASE = process.env.REACT_APP_AT_API_BASE;
 const TABLE = process.env.REACT_APP_AT_TABLE_NAME;
 const API_KEY = process.env.REACT_APP_AT_API_KEY;
 
 const App = () => {
+  const [rooms, setRooms] = useState([]);
+  const [buildings, setBuilding] = useState([]);
+  let [sqFt, setSqFt] = useState([]);
+
+  const bedRooms = [{ roomsLabel: "1" }, { roomsLabel: "2" }];
+  const edifice = [{ buildingLabel: "A" }, { buildingLabel: "B" }];
+  const SquareFeets = [
+    { sqFtLabel: "400-799" },
+    { sqFtLabel: "800-999" },
+    { sqFtLabel: "1000" },
+  ];
+
   const [unitsFloor1, setUnitsFloor1] = useState([]);
   const [unitsFloor2, setUnitsFloor2] = useState([]);
   const [unitsFloor3, setUnitsFloor3] = useState([]);
@@ -140,10 +168,114 @@ const App = () => {
     fetchData();
   }, []);
 
+  const filteredUnits =
+    rooms.length || buildings.length || sqFt.length
+      ? combineUnits.filter((apartment) => {
+          const { room, building, area } = apartment.fields;
+
+          let sqFtMod = "";
+          switch (true) {
+            case area >= 400 && area <= 799:
+              sqFtMod = "400-799";
+              break;
+            case area >= 800 && area <= 999:
+              sqFtMod = "800-999";
+              break;
+            case area >= 1000:
+              sqFtMod = "1000";
+              break;
+            default:
+              return "";
+          }
+
+          return (
+            (!rooms.length || rooms.includes(room)) &&
+            (!buildings.length || buildings.includes(building)) &&
+            (!sqFt || !sqFt.length || sqFt.includes(sqFtMod))
+          );
+        })
+      : combineUnits;
+
   return (
-    <div className="App">
-      <Units combineUnits={combineUnits} />
-    </div>
+    <Router>
+      <Container>
+        <div className="App">
+          <FormControl>
+            <FormGroup>
+              {bedRooms.map((a, i) => (
+                <FormControlLabel
+                  key={i}
+                  control={
+                    <Checkbox
+                      onChange={(event) =>
+                        setRooms((prev) =>
+                          event.target.checked ? [...prev, a.roomsLabel] : []
+                        )
+                      }
+                    />
+                  }
+                  label={a.roomsLabel}
+                  value={a.roomsLabel}
+                />
+              ))}
+            </FormGroup>
+          </FormControl>
+          <FormControl>
+            <FormGroup>
+              {edifice.map((e, i) => (
+                <FormControlLabel
+                  key={i}
+                  control={
+                    <Checkbox
+                      onChange={(event) =>
+                        setBuilding((prev) =>
+                          event.target.checked ? [...prev, e.buildingLabel] : []
+                        )
+                      }
+                    />
+                  }
+                  label={e.buildingLabel}
+                  value={e.buildingLabel}
+                />
+              ))}
+            </FormGroup>
+          </FormControl>
+          <FormControl>
+            <FormGroup>
+              {SquareFeets.map((s, i) => (
+                <FormControlLabel
+                  key={i}
+                  control={
+                    <Checkbox
+                      onChange={(event) =>
+                        setSqFt((prev) =>
+                          event.target.checked ? [...prev, s.sqFtLabel] : []
+                        )
+                      }
+                    />
+                  }
+                  label={s.sqFtLabel}
+                  value={s.sqFtLabel}
+                />
+              ))}
+            </FormGroup>
+          </FormControl>
+        </div>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => <UnitList filteredUnits={filteredUnits} />}
+          />
+
+          <Route
+            exact
+            path="/unit/:unitNumber"
+            render={() => <Unit data={combineUnits} />}
+          />
+        </Switch>
+      </Container>
+    </Router>
   );
 };
 
