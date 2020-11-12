@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
@@ -18,14 +19,20 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    h1: "'Unna', sans-serif",
-    h2: "'Unna', sans-serif",
+    h1: { fontFamily: "'Montserrat', sans-serif", fontSize: "40px" },
+    h2: { fontFamily: "'Montserrat', sans-serif", fontSize: "40px" },
     fontFamily: "'Montserrat', sans-serif",
   },
+
+  card: {
+    backgroundColor: "#f7f1f0",
+  },
+  shadows: [0],
 });
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
+    <CssBaseline />
     <App />
   </MuiThemeProvider>,
   document.getElementById("root")

@@ -167,7 +167,7 @@ const UnitList = ({ combineUnits }) => {
           ))}
         </FormGroup>
       </FormControl>
-      <Container>
+      <Container maxWidth={false}>
         <Units filteredUnits={filteredUnits} level={1} />
         <Units filteredUnits={filteredUnits} level={2} />
         <Units filteredUnits={filteredUnits} level={3} />
