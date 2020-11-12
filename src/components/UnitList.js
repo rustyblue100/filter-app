@@ -18,13 +18,16 @@ import {
 
 const UnitList = ({ combineUnits }) => {
   const [rooms, setRooms] = useState(
-    localStorage.getItem("rooms") ? localStorage.getItem("rooms") : []
+    JSON.parse(sessionStorage.getItem("rooms"))
+      ? JSON.parse(sessionStorage.getItem("rooms"))
+      : []
   );
+
   const [buildings, setBuilding] = useState(
-    localStorage.getItem("building") ? localStorage.getItem("building") : []
+    sessionStorage.getItem("building") ? sessionStorage.getItem("building") : []
   );
   let [sqFt, setSqFt] = useState(
-    localStorage.getItem("sqft") ? localStorage.getItem("sqft") : []
+    sessionStorage.getItem("sqft") ? sessionStorage.getItem("sqft") : []
   );
 
   const bedRooms = [{ roomsLabel: "1" }, { roomsLabel: "2" }];
@@ -63,28 +66,15 @@ const UnitList = ({ combineUnits }) => {
         })
       : combineUnits;
 
-  /*   useEffect(() => {
-    window.onload = () => {
-      // Clear localStorage
-
-      localStorage.removeItem("rooms");
-
-      localStorage.removeItem("building");
-
-      localStorage.removeItem("sqft");
-    };
-  }, []); */
   return (
     <>
       <FormControl>
         <Button
           onClick={() => {
-            localStorage.removeItem("rooms");
             setRooms([]);
-            localStorage.removeItem("building");
             setBuilding([]);
-            localStorage.removeItem("sqft");
             setSqFt([]);
+            sessionStorage.clear();
           }}
         >
           Clear
@@ -96,20 +86,23 @@ const UnitList = ({ combineUnits }) => {
               control={
                 <Checkbox
                   onChange={(event) => {
-                    event.target.checked
-                      ? localStorage.setItem("rooms", a.roomsLabel)
-                      : localStorage.removeItem("rooms");
-                    setRooms((prev) =>
-                      event.target.checked ? [...prev, a.roomsLabel] : []
+                    const checkedValues = (prev) =>
+                      event.target.checked ? [prev, ...a.roomsLabel] : [];
+
+                    sessionStorage.setItem(
+                      "rooms",
+                      JSON.stringify(checkedValues())
                     );
+
+                    setRooms(checkedValues);
                   }}
                 />
               }
               label={a.roomsLabel}
               value={a.roomsLabel}
               checked={
-                localStorage.getItem("rooms") &&
-                localStorage.getItem("rooms") === a.roomsLabel &&
+                JSON.parse(sessionStorage.getItem("rooms")) &&
+                JSON.parse(sessionStorage.getItem("rooms")) === a.roomsLabel &&
                 true
               }
             />
@@ -125,8 +118,8 @@ const UnitList = ({ combineUnits }) => {
                 <Checkbox
                   onChange={(event) => {
                     event.target.checked
-                      ? localStorage.setItem("building", e.buildingLabel)
-                      : localStorage.removeItem("building");
+                      ? sessionStorage.setItem("building", e.buildingLabel)
+                      : sessionStorage.removeItem("building");
 
                     setBuilding((prev) =>
                       event.target.checked ? [...prev, e.buildingLabel] : []
@@ -137,8 +130,8 @@ const UnitList = ({ combineUnits }) => {
               label={e.buildingLabel}
               value={e.buildingLabel}
               checked={
-                localStorage.getItem("building") &&
-                localStorage.getItem("building") === e.buildingLabel &&
+                sessionStorage.getItem("building") &&
+                sessionStorage.getItem("building") === e.buildingLabel &&
                 true
               }
             />
@@ -154,8 +147,8 @@ const UnitList = ({ combineUnits }) => {
                 <Checkbox
                   onChange={(event) => {
                     event.target.checked
-                      ? localStorage.setItem("sqft", s.sqFtLabel)
-                      : localStorage.removeItem("sqft");
+                      ? sessionStorage.setItem("sqft", s.sqFtLabel)
+                      : sessionStorage.removeItem("sqft");
 
                     setSqFt((prev) =>
                       event.target.checked ? [...prev, s.sqFtLabel] : []
@@ -166,8 +159,8 @@ const UnitList = ({ combineUnits }) => {
               label={s.sqFtLabel}
               value={s.sqFtLabel}
               checked={
-                localStorage.getItem("sqft") &&
-                localStorage.getItem("sqft") === s.sqFtLabel &&
+                sessionStorage.getItem("sqft") &&
+                sessionStorage.getItem("sqft") === s.sqFtLabel &&
                 true
               }
             />

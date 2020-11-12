@@ -18,8 +18,13 @@ import MaskedInput from "react-text-mask";
 
 const MaterialUiForm = () => {
   return (
-    <form autoComplete="on">
+    <form
+      autoComplete="on"
+      action="https://formspree.io/f/{form_id}"
+      method="post"
+    >
       <Input
+        required
         placeholder="First Name"
         inputProps={{ "aria-label": "First Name" }}
       />
@@ -29,6 +34,7 @@ const MaterialUiForm = () => {
       />
       <br />
       <Input
+        required
         fullWidth
         placeholder="Email"
         inputProps={{ "aria-label": "Email" }}
@@ -41,6 +47,7 @@ const MaterialUiForm = () => {
       />
 
       <TextField
+        required
         id="standard-multiline-static"
         fullWidth
         placeholder="Message"
@@ -48,7 +55,7 @@ const MaterialUiForm = () => {
         multiline
         rows={4}
       />
-      <Button fullWidth click="submit">
+      <Button type="submit" fullWidth>
         Submit
       </Button>
     </form>

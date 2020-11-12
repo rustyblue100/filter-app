@@ -107,7 +107,9 @@ const Units = ({ filteredUnits, level }) => {
                     }}
                     className={`restore-${u.fields.unit}`}
                   >
-                    <Button variant="contained">See more</Button>
+                    <Button color="secondary" variant="contained">
+                      See more
+                    </Button>
                   </Link>
 
                   <Link

@@ -25,9 +25,11 @@ const Unit = ({ data }) => {
     (unit) => unit.fields && unit.fields.unit === unitNumber
   );
 
-  const { unit, area, building, planpng, keyplan } = unitData[0]
+  const { unit, area, building, planpng, keyplan, Planpdf } = unitData[0]
     ? unitData[0].fields
     : "";
+
+  console.log(Planpdf);
 
   return (
     <Container>
@@ -48,17 +50,15 @@ const Unit = ({ data }) => {
         spacing={3}
       >
         <Grid item>
-          <img
-            src={planpng && planpng[0].thumbnails.full.url}
-            alt={unit}
-            width="500"
-          />
+          <img src={planpng && planpng[0].url} alt={unit} width="500" />
 
           {/*   <Divider style={{ margin: "20px 0" }} fullWidth /> */}
         </Grid>
 
         <Grid item>
-          <Button variant="outlined">Download pdf</Button>
+          <Button href={Planpdf && Planpdf[0].url} variant="outlined">
+            Download pdf
+          </Button>
           <ContactForm />
         </Grid>
       </Grid>
