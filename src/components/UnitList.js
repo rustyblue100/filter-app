@@ -8,6 +8,7 @@ import {
   Card,
   CardMedia,
   Typography,
+  Button,
   FormControl,
   Checkbox,
   FormGroup,
@@ -61,9 +62,33 @@ const UnitList = ({ combineUnits }) => {
           );
         })
       : combineUnits;
+
+  /*   useEffect(() => {
+    window.onload = () => {
+      // Clear localStorage
+
+      localStorage.removeItem("rooms");
+
+      localStorage.removeItem("building");
+
+      localStorage.removeItem("sqft");
+    };
+  }, []); */
   return (
     <>
       <FormControl>
+        <Button
+          onClick={() => {
+            localStorage.removeItem("rooms");
+            setRooms([]);
+            localStorage.removeItem("building");
+            setBuilding([]);
+            localStorage.removeItem("sqft");
+            setSqFt([]);
+          }}
+        >
+          Clear
+        </Button>
         <FormGroup>
           {bedRooms.map((a, i) => (
             <FormControlLabel
