@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import LazyLoad from "react-lazyload";
-import { Link } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 import {
   Container,
@@ -30,27 +30,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Units = ({ filteredUnits, level }) => {
-  const [spacing, setSpacing] = useState(2);
   const classes = useStyles();
+  const location = useLocation();
 
+  console.log(location.state);
+
+  /*  useEffect(() => {
+    const item = document.querySelector(".restore-" + location.state.id);
+    console.log(item);
+    if (item) {
+      item.scrollIntoView();
+    }
+  }, [location]); */
+
+  // Change level labels
   function levelLabels() {
     switch (true) {
       case level === 1:
         return <sup>st</sup>;
-
       case level === 2:
         return <sup>nd</sup>;
-
       case level === 3:
         return <sup>rd</sup>;
-
       case level >= 4:
         return <sup>th</sup>;
-
       default:
         return "";
     }
   }
+
   return (
     <>
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
@@ -92,18 +100,30 @@ const Units = ({ filteredUnits, level }) => {
                     SqFt: {u.fields.area}
                   </Typography>
 
-                  <Link to={`/unit/${u.fields.unit}`}>
+                  <Link
+                    to={{
+                      pathname: `/unit/${u.fields.unit}`,
+                      state: { id: u.fields.unit },
+                    }}
+                    className={`restore-${u.fields.unit}`}
+                  >
                     <Button variant="contained">See more</Button>
                   </Link>
 
-                  <Link to={`/unit/${u.fields.unit}`}>
+                  <Link
+                    to={{
+                      pathname: `/unit/${u.fields.unit}`,
+                      state: { id: u.fields.unit },
+                    }}
+                    className={`restore-${u.fields.unit}`}
+                  >
                     <CardMedia
-                      className={classes.media}
+                      className={`${classes.media}`}
                       image={
                         u.fields.planpng &&
                         u.fields.planpng[0].thumbnails.large.url
                       }
-                      title="Paella dish"
+                      title={`plan of ${u.fields.unit} unit`}
                     />
                   </Link>
                 </Card>
