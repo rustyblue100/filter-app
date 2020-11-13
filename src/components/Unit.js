@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import LazyLoad from "react-lazyload";
 import { Link, useParams, useLocation } from "react-router-dom";
 import ContactForm from "./ContactForm";
+import { makeStyles } from "@material-ui/core/styles";
 
 import {
   Container,
@@ -15,8 +16,17 @@ import {
   Divider,
 } from "@material-ui/core";
 
+const useStyles = makeStyles((theme) => ({
+  media: {
+    width: 600,
+    height: 600,
+    objectFit: "contain",
+  },
+}));
+
 const Unit = ({ data }) => {
   console.log(useLocation());
+  const classes = useStyles();
   /*   const restoreId = useLocation().state.id;
   const roomsState = useLocation().state.rooms;
  */
@@ -30,10 +40,8 @@ const Unit = ({ data }) => {
     ? unitData[0].fields
     : "";
 
-  console.log(Planpdf);
-
   return (
-    <Container maxWidth="xl">
+    <Container>
       <Link
         to={{
           pathname: "/",
@@ -43,20 +51,19 @@ const Unit = ({ data }) => {
         <Button>back</Button>
       </Link>
 
-      <Grid
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="flex-end"
-        spacing={3}
-      >
-        <Grid item>
-          <img src={planpng && planpng[0].url} alt={unit} width="500" />
+      <Grid container alignItems="flex-end">
+        <Grid item md={8}>
+          <CardMedia
+            className={classes.media}
+            src={planpng && planpng[0].url}
+            title={unit}
+            component={"img"}
+          ></CardMedia>
 
           {/*   <Divider style={{ margin: "20px 0" }} fullWidth /> */}
         </Grid>
 
-        <Grid item>
+        <Grid item md={4}>
           <Button href={Planpdf && Planpdf[0].url} variant="outlined">
             Download pdf
           </Button>

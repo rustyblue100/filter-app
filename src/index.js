@@ -7,6 +7,28 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1793,
+      xl: 1920,
+    },
+  },
+  overrides: {
+    components: {
+      cardContent: {
+        padding: 0,
+      },
+    },
+
+    /*     MuiCardContent: {
+      root: {
+        padding: 0,
+      },
+    }, */
+  },
   palette: {
     primary: {
       main: "#1c2e40",
@@ -14,19 +36,22 @@ const theme = createMuiTheme({
     secondary: {
       main: "#cc8963",
     },
+    third: {
+      main: "rgb(247, 241, 240)",
+    },
     background: {
       default: "#f7f1f0",
     },
   },
   typography: {
-    h1: { fontFamily: "'Montserrat', sans-serif", fontSize: "40px" },
+    h1: { fontFamily: "'Unna', sans-serif", fontSize: "40px" },
     h2: { fontFamily: "'Montserrat', sans-serif", fontSize: "40px" },
+    body1: { lineHeight: "1.1" },
     fontFamily: "'Montserrat', sans-serif",
+    body2: { family: "'Unna', sans-serif" },
   },
   shape: { borderRadius: 0 },
-  card: {
-    backgroundColor: "#f7f1f0",
-  },
+
   shadows: [0],
 });
 

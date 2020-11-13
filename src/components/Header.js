@@ -1,7 +1,26 @@
 import React from "react";
 import "./header.css";
 
+import { makeStyles } from "@material-ui/core/styles";
+
+import {
+  Container,
+  Grid,
+  Card,
+  CardMedia,
+  Typography,
+  Input,
+  Button,
+  Divider,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  grid: {
+    backgroundColor: "#000000",
+  },
+}));
 const Header = () => {
+  const classes = useStyles();
   return (
     <div style={{ marginBottom: "100px" }}>
       <header id="header">

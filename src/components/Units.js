@@ -13,19 +13,38 @@ import {
   Button,
   Paper,
   CardActions,
+  Box,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  paper: {
-    height: 140,
-    width: 100,
+  overtides: {
+    MuiButton: {
+      outlined: {
+        borderRadius: "0",
+      },
+    },
   },
+  more: {
+    color: theme.palette.background.default,
+    padding: "3px 23px",
+    fontFamily: theme.typography.body2.family,
+    fontSize: "20px",
+  },
+
+  card: { marginBottom: "20px", backgroundColor: "transparent" },
+  cardContent: { padding: 0 },
+  cardActions: { padding: "10px 0" },
   media: {
-    height: 0,
-    paddingTop: "100%",
+    marginTop: "10px",
+    width: "365px",
+    height: "400px",
+    objectFit: "contain",
+    border: `1px solid  ${theme.palette.primary.main}`,
+    padding: "30px",
+    boxSizing: "border-box",
   },
   control: {
     padding: theme.spacing(2),
@@ -77,28 +96,20 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   return (
     <div style={{ padding: "0px 0 100px 0" }}>
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
-        <Typography gutterBottom variant="h2">
-          {level}
-          {levelLabels()} floor
-        </Typography>
+        <Box component="span" m={1}>
+          <Typography gutterBottom variant="h2">
+            {level}
+            {levelLabels()} floor
+          </Typography>
+        </Box>
       )}
-      <Grid container direction="row" alignItems="center" spacing={1}>
+      <Grid container direction="row" alignItems="center" spacing={4}>
         {filteredUnits
           .filter((unit) => unit.fields.level === String(level))
           .map((u, index) => (
             <Grid item xs>
-              <Card
-                style={{
-                  marginBottom: "20px",
-                  width: "367px",
-                  backgroundColor: "transparent",
-                }}
-              >
-                <CardContent
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                >
+              <Card className={classes.card}>
+                <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="body1">
                     BUILDING:<strong>{u.fields.building}</strong>
                   </Typography>
@@ -115,8 +126,9 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                     FLOOR: {u.fields.level}
                   </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions className={classes.cardActions}>
                   <Button
+                    className={classes.more}
                     onClick={handleLocalStorage}
                     component={Link}
                     to={{
@@ -133,7 +145,6 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                 <LazyLoad height={400} once>
                   <CardMedia
                     onClick={handleLocalStorage}
-                    component={Link}
                     to={{
                       pathname: `/unit/${u.fields.unit}`,
                       state: { id: u.fields.unit },
@@ -143,6 +154,8 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                       u.fields.planpng &&
                       u.fields.planpng[0].thumbnails.large.url
                     }
+                    component={"img"}
+                    alt={`plan of ${u.fields.unit} unit`}
                     title={`plan of ${u.fields.unit} unit`}
                   />
                 </LazyLoad>
