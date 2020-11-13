@@ -125,7 +125,7 @@ const App = () => {
               setUnitsFloor2(responses[1].data.records);
               setUnitsFloor3(responses[2].data.records);
               setUnitsFloor4(responses[3].data.records);
-              /*        setUnitsFloor5(responses[4].data.records);
+              setUnitsFloor5(responses[4].data.records);
               setUnitsFloor6(responses[5].data.records);
               setUnitsFloor7(responses[6].data.records);
               setUnitsFloor8(responses[7].data.records);
@@ -134,7 +134,7 @@ const App = () => {
               setUnitsFloor11(responses[10].data.records);
               setUnitsFloor12(responses[11].data.records);
               setUnitsFloor13(responses[12].data.records);
-              setUnitsFloor14(responses[13].data.records); */
+              setUnitsFloor14(responses[13].data.records);
             })
           );
       } catch (error) {

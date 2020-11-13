@@ -108,41 +108,41 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           .filter((unit) => unit.fields.level === String(level))
           .map((u, index) => (
             <Grid item xs>
-              <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="body1">
-                    BUILDING:<strong>{u.fields.building}</strong>
-                  </Typography>
-                  <Typography gutterBottom variant="body1">
-                    UNIT: <strong>{u.fields.unit}</strong>
-                  </Typography>
-                  <Typography gutterBottom variant="body1">
-                    SIZE: <strong>{u.fields.area}</strong>
-                  </Typography>
-                  <Typography gutterBottom variant="body1">
-                    BEDROOM:<strong> {u.fields.room}</strong>
-                  </Typography>
-                  <Typography gutterBottom variant="body1">
-                    FLOOR: <strong>{u.fields.level}</strong>
-                  </Typography>
-                </CardContent>
-                <CardActions className={classes.cardActions}>
-                  <Button
-                    className={classes.more}
-                    onClick={handleLocalStorage}
-                    component={Link}
-                    to={{
-                      pathname: `/unit/${u.fields.unit}`,
-                      state: { id: u.fields.unit },
-                    }}
-                    color="secondary"
-                    variant="contained"
-                  >
-                    See more
-                  </Button>
-                </CardActions>
+              <LazyLoad height={400} once>
+                <Card className={classes.card}>
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="body1">
+                      BUILDING:<strong>{u.fields.building}</strong>
+                    </Typography>
+                    <Typography gutterBottom variant="body1">
+                      UNIT: <strong>{u.fields.unit}</strong>
+                    </Typography>
+                    <Typography gutterBottom variant="body1">
+                      SIZE: <strong>{u.fields.area}</strong>
+                    </Typography>
+                    <Typography gutterBottom variant="body1">
+                      BEDROOM:<strong> {u.fields.room}</strong>
+                    </Typography>
+                    <Typography gutterBottom variant="body1">
+                      FLOOR: <strong>{u.fields.level}</strong>
+                    </Typography>
+                  </CardContent>
+                  <CardActions className={classes.cardActions}>
+                    <Button
+                      className={classes.more}
+                      onClick={handleLocalStorage}
+                      component={Link}
+                      to={{
+                        pathname: `/unit/${u.fields.unit}`,
+                        state: { id: u.fields.unit },
+                      }}
+                      color="secondary"
+                      variant="contained"
+                    >
+                      See more
+                    </Button>
+                  </CardActions>
 
-                <LazyLoad height={400} once>
                   <CardMedia
                     onClick={handleLocalStorage}
                     to={{
@@ -158,8 +158,8 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                     alt={`plan of ${u.fields.unit} unit`}
                     title={`plan of ${u.fields.unit} unit`}
                   />
-                </LazyLoad>
-              </Card>
+                </Card>
+              </LazyLoad>
             </Grid>
           ))}
       </Grid>
