@@ -6,36 +6,11 @@ import Header from "./components/Header";
 import Unit from "./components/Unit";
 import UnitList from "./components/UnitList";
 
-import {
-  Container,
-  Grid,
-  Card,
-  CardMedia,
-  Typography,
-  FormControl,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  TextField,
-} from "@material-ui/core";
-
 const BASE = process.env.REACT_APP_AT_API_BASE;
 const TABLE = process.env.REACT_APP_AT_TABLE_NAME;
 const API_KEY = process.env.REACT_APP_AT_API_KEY;
 
 const App = () => {
-  /*   const [rooms, setRooms] = useState([]);
-  const [buildings, setBuilding] = useState([]);
-  let [sqFt, setSqFt] = useState([]);
-
-  const bedRooms = [{ roomsLabel: "1" }, { roomsLabel: "2" }];
-  const edifice = [{ buildingLabel: "A" }, { buildingLabel: "B" }];
-  const SquareFeets = [
-    { sqFtLabel: "400-799" },
-    { sqFtLabel: "800-999" },
-    { sqFtLabel: "1000" },
-  ]; */
-
   const [unitsFloor1, setUnitsFloor1] = useState([]);
   const [unitsFloor2, setUnitsFloor2] = useState([]);
   const [unitsFloor3, setUnitsFloor3] = useState([]);
@@ -147,10 +122,10 @@ const App = () => {
           .then(
             axios.spread((...responses) => {
               setUnitsFloor1(responses[0].data.records);
-              /*               setUnitsFloor2(responses[1].data.records);
+              setUnitsFloor2(responses[1].data.records);
               setUnitsFloor3(responses[2].data.records);
               setUnitsFloor4(responses[3].data.records);
-              setUnitsFloor5(responses[4].data.records);
+              /*        setUnitsFloor5(responses[4].data.records);
               setUnitsFloor6(responses[5].data.records);
               setUnitsFloor7(responses[6].data.records);
               setUnitsFloor8(responses[7].data.records);

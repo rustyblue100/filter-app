@@ -103,7 +103,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           </Typography>
         </Box>
       )}
-      <Grid container direction="row" alignItems="center" spacing={4}>
+      <Grid container direction="row" spacing={4}>
         {filteredUnits
           .filter((unit) => unit.fields.level === String(level))
           .map((u, index) => (
@@ -114,16 +114,16 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                     BUILDING:<strong>{u.fields.building}</strong>
                   </Typography>
                   <Typography gutterBottom variant="body1">
-                    UNIT: {u.fields.unit}
+                    UNIT: <strong>{u.fields.unit}</strong>
                   </Typography>
                   <Typography gutterBottom variant="body1">
-                    SIZE: {u.fields.area}
+                    SIZE: <strong>{u.fields.area}</strong>
                   </Typography>
                   <Typography gutterBottom variant="body1">
-                    BEDROOM: {u.fields.room}
+                    BEDROOM:<strong> {u.fields.room}</strong>
                   </Typography>
                   <Typography gutterBottom variant="body1">
-                    FLOOR: {u.fields.level}
+                    FLOOR: <strong>{u.fields.level}</strong>
                   </Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions}>
