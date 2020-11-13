@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import LazyLoad from "react-lazyload";
-import { Link } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 import {
   Container,
   Grid,
   Card,
+  CardContent,
   CardMedia,
   Typography,
   Button,
+  Paper,
+  CardActions,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,96 +25,132 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "100%",
   },
   control: {
     padding: theme.spacing(2),
   },
 }));
 
-const Units = ({ filteredUnits, level }) => {
-  const [spacing, setSpacing] = useState(2);
+const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   const classes = useStyles();
+  const location = useLocation();
 
+  /*  useEffect(() => {
+    const item = document.querySelector(".restore-" + location.state.id);
+    console.log(item);
+    if (item) {
+      item.scrollIntoView();
+    }
+  }, [location]); */
+
+  // Change level labels
   function levelLabels() {
     switch (true) {
       case level === 1:
         return <sup>st</sup>;
-
       case level === 2:
         return <sup>nd</sup>;
-
       case level === 3:
         return <sup>rd</sup>;
-
       case level >= 4:
         return <sup>th</sup>;
-
       default:
         return "";
     }
   }
+
+  function handleLocalStorage() {
+    if (rooms && rooms.length > 0) {
+      sessionStorage.setItem("rooms", JSON.stringify(rooms));
+    }
+
+    if (buildings && buildings.length > 0) {
+      sessionStorage.setItem("buildings", JSON.stringify(buildings));
+    }
+
+    if (sqFt && sqFt.length > 0) {
+      sessionStorage.setItem("sqFt", JSON.stringify(sqFt));
+    }
+  }
+
   return (
-    <>
+    <div style={{ padding: "0px 0 100px 0" }}>
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
-        <h2>
+        <Typography gutterBottom variant="h2">
           {level}
           {levelLabels()} floor
-        </h2>
+        </Typography>
       )}
-
-      <Grid
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="center"
-        spacing={3}
-      >
+      <Grid container direction="row" alignItems="center" spacing={1}>
         {filteredUnits
           .filter((unit) => unit.fields.level === String(level))
           .map((u, index) => (
-            <LazyLoad height={400} once>
-              <Grid item>
-                <Card
+            <Grid item xs>
+              <Card
+                style={{
+                  marginBottom: "20px",
+                  width: "367px",
+                  backgroundColor: "transparent",
+                }}
+              >
+                <CardContent
                   style={{
-                    marginBottom: "20px",
-                    width: "300px",
-                    padding: "20px",
+                    marginBottom: "10px",
                   }}
                 >
-                  <Typography gutterBottom variant="h4">
-                    {u.fields.unit}
+                  <Typography gutterBottom variant="body1">
+                    BUILDING:<strong>{u.fields.building}</strong>
                   </Typography>
-                  <Typography gutterBottom variant="h6">
-                    rooms: {u.fields.room}
+                  <Typography gutterBottom variant="body1">
+                    UNIT: {u.fields.unit}
                   </Typography>
-                  <Typography gutterBottom variant="h6">
-                    building: {u.fields.building}
+                  <Typography gutterBottom variant="body1">
+                    SIZE: {u.fields.area}
                   </Typography>
-                  <Typography gutterBottom variant="h6">
-                    SqFt: {u.fields.area}
+                  <Typography gutterBottom variant="body1">
+                    BEDROOM: {u.fields.room}
                   </Typography>
+                  <Typography gutterBottom variant="body1">
+                    FLOOR: {u.fields.level}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    onClick={handleLocalStorage}
+                    component={Link}
+                    to={{
+                      pathname: `/unit/${u.fields.unit}`,
+                      state: { id: u.fields.unit },
+                    }}
+                    color="secondary"
+                    variant="contained"
+                  >
+                    See more
+                  </Button>
+                </CardActions>
 
-                  <Link to={`/unit/${u.fields.unit}`}>
-                    <Button variant="contained">See more</Button>
-                  </Link>
-
-                  <Link to={`/unit/${u.fields.unit}`}>
-                    <CardMedia
-                      className={classes.media}
-                      image={
-                        u.fields.planpng &&
-                        u.fields.planpng[0].thumbnails.large.url
-                      }
-                      title="Paella dish"
-                    />
-                  </Link>
-                </Card>
-              </Grid>
-            </LazyLoad>
+                <LazyLoad height={400} once>
+                  <CardMedia
+                    onClick={handleLocalStorage}
+                    component={Link}
+                    to={{
+                      pathname: `/unit/${u.fields.unit}`,
+                      state: { id: u.fields.unit },
+                    }}
+                    className={`${classes.media}`}
+                    image={
+                      u.fields.planpng &&
+                      u.fields.planpng[0].thumbnails.large.url
+                    }
+                    title={`plan of ${u.fields.unit} unit`}
+                  />
+                </LazyLoad>
+              </Card>
+            </Grid>
           ))}
       </Grid>
-    </>
+    </div>
   );
 };
 
