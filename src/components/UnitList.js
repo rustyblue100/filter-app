@@ -16,6 +16,8 @@ import {
   TextField,
 } from "@material-ui/core";
 
+import Pagination from "@material-ui/lab/Pagination";
+
 const UnitList = ({ combineUnits }) => {
   const [rooms, setRooms] = useState(
     sessionStorage.getItem("rooms") ? sessionStorage.getItem("rooms") : []
@@ -169,6 +171,7 @@ const UnitList = ({ combineUnits }) => {
         </Grid>
       </Grid>
 
+      <Pagination count={10} color="primary" />
       <Units filteredUnits={filteredUnits} level={1} {...filters} />
       <Units filteredUnits={filteredUnits} level={2} {...filters} />
       <Units filteredUnits={filteredUnits} level={3} {...filters} />
