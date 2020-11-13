@@ -32,11 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Units = ({ filteredUnits, level }) => {
+const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   const classes = useStyles();
   const location = useLocation();
-
-  console.log(location.state);
 
   /*  useEffect(() => {
     const item = document.querySelector(".restore-" + location.state.id);
@@ -62,8 +60,22 @@ const Units = ({ filteredUnits, level }) => {
     }
   }
 
+  function handleLocalStorage() {
+    if (rooms && rooms.length > 0) {
+      sessionStorage.setItem("rooms", JSON.stringify(rooms));
+    }
+
+    if (buildings && buildings.length > 0) {
+      sessionStorage.setItem("buildings", JSON.stringify(buildings));
+    }
+
+    if (sqFt && sqFt.length > 0) {
+      sessionStorage.setItem("sqFt", JSON.stringify(sqFt));
+    }
+  }
+
   return (
-    <>
+    <div style={{ padding: "0px 0 100px 0" }}>
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
         <Typography gutterBottom variant="h2">
           {level}
@@ -105,6 +117,7 @@ const Units = ({ filteredUnits, level }) => {
                 </CardContent>
                 <CardActions>
                   <Button
+                    onClick={handleLocalStorage}
                     component={Link}
                     to={{
                       pathname: `/unit/${u.fields.unit}`,
@@ -119,6 +132,7 @@ const Units = ({ filteredUnits, level }) => {
 
                 <LazyLoad height={400} once>
                   <CardMedia
+                    onClick={handleLocalStorage}
                     component={Link}
                     to={{
                       pathname: `/unit/${u.fields.unit}`,
@@ -136,7 +150,7 @@ const Units = ({ filteredUnits, level }) => {
             </Grid>
           ))}
       </Grid>
-    </>
+    </div>
   );
 };
 

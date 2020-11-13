@@ -23,7 +23,7 @@ const theme = createMuiTheme({
     h2: { fontFamily: "'Montserrat', sans-serif", fontSize: "40px" },
     fontFamily: "'Montserrat', sans-serif",
   },
-
+  shape: { borderRadius: 0 },
   card: {
     backgroundColor: "#f7f1f0",
   },

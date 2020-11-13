@@ -16,9 +16,9 @@ import {
 
 const Unit = ({ data }) => {
   console.log(useLocation());
-  const restoreId = useLocation().state.id;
+  /*   const restoreId = useLocation().state.id;
   const roomsState = useLocation().state.rooms;
-
+ */
   const { unitNumber } = useParams();
 
   const unitData = data.filter(
@@ -32,11 +32,11 @@ const Unit = ({ data }) => {
   console.log(Planpdf);
 
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Link
         to={{
           pathname: "/",
-          state: { restoreId, roomsState },
+          state: {},
         }}
       >
         <Button>back</Button>

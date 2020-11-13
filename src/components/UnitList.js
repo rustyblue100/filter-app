@@ -18,16 +18,16 @@ import {
 
 const UnitList = ({ combineUnits }) => {
   const [rooms, setRooms] = useState(
-    JSON.parse(sessionStorage.getItem("rooms"))
-      ? JSON.parse(sessionStorage.getItem("rooms"))
-      : []
+    sessionStorage.getItem("rooms") ? sessionStorage.getItem("rooms") : []
   );
 
   const [buildings, setBuilding] = useState(
-    sessionStorage.getItem("building") ? sessionStorage.getItem("building") : []
+    sessionStorage.getItem("buildings")
+      ? sessionStorage.getItem("buildings")
+      : []
   );
   let [sqFt, setSqFt] = useState(
-    sessionStorage.getItem("sqft") ? sessionStorage.getItem("sqft") : []
+    sessionStorage.getItem("sqFt") ? sessionStorage.getItem("sqFt") : []
   );
 
   const bedRooms = [{ roomsLabel: "1" }, { roomsLabel: "2" }];
@@ -66,124 +66,124 @@ const UnitList = ({ combineUnits }) => {
         })
       : combineUnits;
 
+  const filters = {
+    rooms,
+    buildings,
+    sqFt,
+  };
+
   return (
-    <>
-      <FormControl>
-        <Button
-          onClick={() => {
-            setRooms([]);
-            setBuilding([]);
-            setSqFt([]);
-            sessionStorage.clear();
-          }}
-        >
-          Clear
-        </Button>
-        <FormGroup>
-          {bedRooms.map((a, i) => (
-            <FormControlLabel
-              key={i}
-              control={
-                <Checkbox
-                  onChange={(event) => {
-                    const checkedValues = (prev) =>
-                      event.target.checked ? [prev, ...a.roomsLabel] : [];
+    <Container maxWidth="lg">
+      <Grid container justify="flext-start" alignItems="flex-start'">
+        <Grid item xs={4}>
+          <Typography variant="h1">Find your home</Typography>
+        </Grid>
 
-                    sessionStorage.setItem(
-                      "rooms",
-                      JSON.stringify(checkedValues())
-                    );
-
-                    setRooms(checkedValues);
-                  }}
+        <Grid item md={2}>
+          <FormControl>
+            <FormGroup>
+              {bedRooms.map((a, i) => {
+                return (
+                  <FormControlLabel
+                    key={i}
+                    control={
+                      <Checkbox
+                        onChange={(event) => {
+                          sessionStorage.clear();
+                          setRooms((prev) =>
+                            event.target.checked ? [...prev, a.roomsLabel] : []
+                          );
+                        }}
+                      />
+                    }
+                    label={a.roomsLabel}
+                    value={a.roomsLabel}
+                    checked={rooms && rooms.includes(a.roomsLabel) && true}
+                  />
+                );
+              })}
+            </FormGroup>
+          </FormControl>
+        </Grid>
+        <Grid item md={2}>
+          <FormControl>
+            <FormGroup>
+              {SquareFeets.map((s, i) => (
+                <FormControlLabel
+                  key={i}
+                  control={
+                    <Checkbox
+                      onChange={(event) => {
+                        sessionStorage.clear();
+                        setSqFt((prev) =>
+                          event.target.checked ? [...prev, s.sqFtLabel] : []
+                        );
+                      }}
+                    />
+                  }
+                  label={s.sqFtLabel}
+                  value={s.sqFtLabel}
+                  checked={sqFt && sqFt.includes(s.sqFtLabel) && true}
                 />
-              }
-              label={a.roomsLabel}
-              value={a.roomsLabel}
-              checked={
-                JSON.parse(sessionStorage.getItem("rooms")) &&
-                JSON.parse(sessionStorage.getItem("rooms")) === a.roomsLabel &&
-                true
-              }
-            />
-          ))}
-        </FormGroup>
-      </FormControl>
-      <FormControl>
-        <FormGroup>
-          {edifice.map((e, i) => (
-            <FormControlLabel
-              key={i}
-              control={
-                <Checkbox
-                  onChange={(event) => {
-                    event.target.checked
-                      ? sessionStorage.setItem("building", e.buildingLabel)
-                      : sessionStorage.removeItem("building");
-
-                    setBuilding((prev) =>
-                      event.target.checked ? [...prev, e.buildingLabel] : []
-                    );
-                  }}
+              ))}
+            </FormGroup>
+          </FormControl>
+        </Grid>
+        <Grid item md={1}>
+          <FormControl>
+            <FormGroup>
+              {edifice.map((e, i) => (
+                <FormControlLabel
+                  key={i}
+                  control={
+                    <Checkbox
+                      onChange={(event) => {
+                        sessionStorage.clear();
+                        setBuilding((prev) =>
+                          event.target.checked ? [...prev, e.buildingLabel] : []
+                        );
+                      }}
+                    />
+                  }
+                  label={e.buildingLabel}
+                  value={e.buildingLabel}
+                  checked={
+                    buildings && buildings.includes(e.buildingLabel) && true
+                  }
                 />
-              }
-              label={e.buildingLabel}
-              value={e.buildingLabel}
-              checked={
-                sessionStorage.getItem("building") &&
-                sessionStorage.getItem("building") === e.buildingLabel &&
-                true
-              }
-            />
-          ))}
-        </FormGroup>
-      </FormControl>
-      <FormControl>
-        <FormGroup>
-          {SquareFeets.map((s, i) => (
-            <FormControlLabel
-              key={i}
-              control={
-                <Checkbox
-                  onChange={(event) => {
-                    event.target.checked
-                      ? sessionStorage.setItem("sqft", s.sqFtLabel)
-                      : sessionStorage.removeItem("sqft");
+              ))}
+            </FormGroup>
+          </FormControl>
+        </Grid>
+        <Grid item xs={1}>
+          <Button
+            onClick={() => {
+              setRooms([]);
+              setBuilding([]);
+              setSqFt([]);
+              sessionStorage.clear();
+            }}
+          >
+            reset filters
+          </Button>
+        </Grid>
+      </Grid>
 
-                    setSqFt((prev) =>
-                      event.target.checked ? [...prev, s.sqFtLabel] : []
-                    );
-                  }}
-                />
-              }
-              label={s.sqFtLabel}
-              value={s.sqFtLabel}
-              checked={
-                sessionStorage.getItem("sqft") &&
-                sessionStorage.getItem("sqft") === s.sqFtLabel &&
-                true
-              }
-            />
-          ))}
-        </FormGroup>
-      </FormControl>
-      <Container maxWidth={false}>
-        <Units filteredUnits={filteredUnits} level={1} />
-        <Units filteredUnits={filteredUnits} level={2} />
-        <Units filteredUnits={filteredUnits} level={3} />
-        <Units filteredUnits={filteredUnits} level={4} />
-        <Units filteredUnits={filteredUnits} level={5} />
-        <Units filteredUnits={filteredUnits} level={6} />
-        <Units filteredUnits={filteredUnits} level={7} />
-        <Units filteredUnits={filteredUnits} level={8} />
-        <Units filteredUnits={filteredUnits} level={9} />
-        <Units filteredUnits={filteredUnits} level={10} />
-        <Units filteredUnits={filteredUnits} level={11} />
-        <Units filteredUnits={filteredUnits} level={12} />
-        <Units filteredUnits={filteredUnits} level={13} />
-        <Units filteredUnits={filteredUnits} level={14} />
-      </Container>
-    </>
+      <Units filteredUnits={filteredUnits} level={1} {...filters} />
+      <Units filteredUnits={filteredUnits} level={2} {...filters} />
+      <Units filteredUnits={filteredUnits} level={3} {...filters} />
+      <Units filteredUnits={filteredUnits} level={4} {...filters} />
+      <Units filteredUnits={filteredUnits} level={5} {...filters} />
+      <Units filteredUnits={filteredUnits} level={6} {...filters} />
+      <Units filteredUnits={filteredUnits} level={7} {...filters} />
+      <Units filteredUnits={filteredUnits} level={8} {...filters} />
+      <Units filteredUnits={filteredUnits} level={9} {...filters} />
+      <Units filteredUnits={filteredUnits} level={10} {...filters} />
+      <Units filteredUnits={filteredUnits} level={11} {...filters} />
+      <Units filteredUnits={filteredUnits} level={12} {...filters} />
+      <Units filteredUnits={filteredUnits} level={13} {...filters} />
+      <Units filteredUnits={filteredUnits} level={14} {...filters} />
+    </Container>
   );
 };
 

@@ -24,7 +24,7 @@ const TABLE = process.env.REACT_APP_AT_TABLE_NAME;
 const API_KEY = process.env.REACT_APP_AT_API_KEY;
 
 const App = () => {
-  const [rooms, setRooms] = useState([]);
+  /*   const [rooms, setRooms] = useState([]);
   const [buildings, setBuilding] = useState([]);
   let [sqFt, setSqFt] = useState([]);
 
@@ -34,7 +34,7 @@ const App = () => {
     { sqFtLabel: "400-799" },
     { sqFtLabel: "800-999" },
     { sqFtLabel: "1000" },
-  ];
+  ]; */
 
   const [unitsFloor1, setUnitsFloor1] = useState([]);
   const [unitsFloor2, setUnitsFloor2] = useState([]);
