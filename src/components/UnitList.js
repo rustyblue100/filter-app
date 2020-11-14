@@ -132,6 +132,10 @@ const UnitList = ({ combineUnits }) => {
     sqFt,
   };
 
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <>
       <Container maxWidth={false} disableGutters>
@@ -275,6 +279,8 @@ const UnitList = ({ combineUnits }) => {
           <Units filteredUnits={filteredUnits} level={12} {...filters} />
           <Units filteredUnits={filteredUnits} level={13} {...filters} />
           <Units filteredUnits={filteredUnits} level={14} {...filters} />
+
+          <button onClick={() => scrollTop()}>TOP</button>
         </Container>
       ) : (
         <Container>

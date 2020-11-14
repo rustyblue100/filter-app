@@ -112,7 +112,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           )
           .map((u, index) => (
             <Grid item xs>
-              <LazyLoad height={400} once>
+              <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="body1">
