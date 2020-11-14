@@ -40,7 +40,8 @@ const theme = createMuiTheme({
       main: "rgb(247, 241, 240)",
     },
     background: {
-      default: "#f7f1f0",
+      default: "#F7F1F0",
+      dark: "eee2db",
     },
   },
   typography: {

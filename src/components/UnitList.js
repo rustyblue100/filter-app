@@ -15,6 +15,8 @@ import {
   FormGroup,
   FormControlLabel,
   TextField,
+  Box,
+  CircularProgress,
 } from "@material-ui/core";
 
 import Pagination from "@material-ui/lab/Pagination";
@@ -74,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UnitList = ({ combineUnits }) => {
   const classes = useStyles();
+
   const [rooms, setRooms] = useState(
     sessionStorage.getItem("rooms") ? sessionStorage.getItem("rooms") : []
   );
@@ -255,23 +258,31 @@ const UnitList = ({ combineUnits }) => {
         </Grid>
       </Container>
 
-      <Container>
-        <Pagination count={10} color="primary" />
-        <Units filteredUnits={filteredUnits} level={1} {...filters} />
-        <Units filteredUnits={filteredUnits} level={2} {...filters} />
-        <Units filteredUnits={filteredUnits} level={3} {...filters} />
-        <Units filteredUnits={filteredUnits} level={4} {...filters} />
-        <Units filteredUnits={filteredUnits} level={5} {...filters} />
-        <Units filteredUnits={filteredUnits} level={6} {...filters} />
-        <Units filteredUnits={filteredUnits} level={7} {...filters} />
-        <Units filteredUnits={filteredUnits} level={8} {...filters} />
-        <Units filteredUnits={filteredUnits} level={9} {...filters} />
-        <Units filteredUnits={filteredUnits} level={10} {...filters} />
-        <Units filteredUnits={filteredUnits} level={11} {...filters} />
-        <Units filteredUnits={filteredUnits} level={12} {...filters} />
-        <Units filteredUnits={filteredUnits} level={13} {...filters} />
-        <Units filteredUnits={filteredUnits} level={14} {...filters} />
-      </Container>
+      {filteredUnits.length ? (
+        <Container>
+          <Pagination count={10} color="primary" />
+          <Units filteredUnits={filteredUnits} level={1} {...filters} />
+          <Units filteredUnits={filteredUnits} level={2} {...filters} />
+          <Units filteredUnits={filteredUnits} level={3} {...filters} />
+          <Units filteredUnits={filteredUnits} level={4} {...filters} />
+          <Units filteredUnits={filteredUnits} level={5} {...filters} />
+          <Units filteredUnits={filteredUnits} level={6} {...filters} />
+          <Units filteredUnits={filteredUnits} level={7} {...filters} />
+          <Units filteredUnits={filteredUnits} level={8} {...filters} />
+          <Units filteredUnits={filteredUnits} level={9} {...filters} />
+          <Units filteredUnits={filteredUnits} level={10} {...filters} />
+          <Units filteredUnits={filteredUnits} level={11} {...filters} />
+          <Units filteredUnits={filteredUnits} level={12} {...filters} />
+          <Units filteredUnits={filteredUnits} level={13} {...filters} />
+          <Units filteredUnits={filteredUnits} level={14} {...filters} />
+        </Container>
+      ) : (
+        <Container>
+          <Box textAlign="center" pt={14}>
+            <CircularProgress />
+          </Box>
+        </Container>
+      )}
     </>
   );
 };
