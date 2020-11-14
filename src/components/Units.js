@@ -105,7 +105,11 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
       )}
       <Grid container direction="row" spacing={4}>
         {filteredUnits
-          .filter((unit) => unit.fields.level === String(level))
+          .filter(
+            (unit) =>
+              unit.fields.availability === true &&
+              unit.fields.level === String(level)
+          )
           .map((u, index) => (
             <Grid item xs>
               <LazyLoad height={400} once>
