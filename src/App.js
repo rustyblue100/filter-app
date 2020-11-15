@@ -3,6 +3,7 @@ import axios from "axios";
 import Units from "./components/Units";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Unit from "./components/Unit";
 import UnitList from "./components/UnitList";
 
@@ -164,6 +165,7 @@ const App = () => {
           />
         </Switch>
       </Router>
+      <Footer />
     </>
   );
 };

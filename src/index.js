@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "./App.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -47,7 +48,7 @@ const theme = createMuiTheme({
   typography: {
     h1: { fontFamily: "'Unna', sans-serif", fontSize: "40px" },
     h2: { fontFamily: "'Montserrat', sans-serif", fontSize: "40px" },
-    body1: { lineHeight: "1.1" },
+    body1: { lineHeight: "1.5" },
     fontFamily: "'Montserrat', sans-serif",
     body2: { family: "'Unna', sans-serif" },
   },

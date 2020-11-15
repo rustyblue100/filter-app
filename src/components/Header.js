@@ -1,26 +1,43 @@
-import React from "react";
-import "./header.css";
+import { useEffect } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-import {
-  Container,
-  Grid,
-  Card,
-  CardMedia,
-  Typography,
-  Input,
-  Button,
-  Divider,
-} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  grid: {
-    backgroundColor: "#000000",
-  },
-}));
 const Header = () => {
-  const classes = useStyles();
+  useEffect(() => {
+    //Hide menu on scroll
+    window.addEventListener("scroll", menuWix);
+
+    function menuWix() {
+      if (
+        document.body.scrollTop > 600 ||
+        document.documentElement.scrollTop > 600
+      ) {
+        document.getElementById("header").style.top = "-100px";
+      } else {
+        document.getElementById("header").style.top = "0px";
+      }
+    }
+
+    //mobile menu
+    const burger = document.querySelector(".burger-menu");
+    const burgerLine = document.querySelector(".burger-menu svg");
+    const burgerClose = document.querySelector(".burger-menu__close");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    burger.addEventListener("click", () => {
+      if (mobileMenu.style.display !== "block") {
+        mobileMenu.style.display = "block";
+        mobileMenu.style.opacity = 1;
+        burgerLine.style.display = "none";
+        burgerClose.style.display = "block";
+        burger.classList.add("active");
+      } else {
+        mobileMenu.style.display = "none";
+        burgerLine.style.display = "block";
+        burgerClose.style.display = "none";
+        burger.classList.remove("active");
+      }
+    });
+  }, []);
+
   return (
     <div style={{ marginBottom: "100px" }}>
       <header id="header">

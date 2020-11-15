@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 
-import LazyLoad from "react-lazyload";
 import { Link, useParams, useLocation } from "react-router-dom";
 import ContactForm from "./ContactForm";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,10 +16,15 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  card: {
+    padding: 0,
+    backgroundColor: theme.palette.background.default,
+  },
   media: {
-    width: 600,
-    height: 600,
+    width: 460,
+    height: "auto",
     objectFit: "contain",
+    backgroundColor: theme.palette.background.default,
   },
 }));
 
@@ -51,14 +55,16 @@ const Unit = ({ data }) => {
         <Button>back</Button>
       </Link>
 
-      <Grid container alignItems="flex-end">
+      <Grid container alignItems="flex-start">
         <Grid item md={8}>
-          <CardMedia
-            className={classes.media}
-            src={planpng && planpng[0].url}
-            title={unit}
-            component={"img"}
-          ></CardMedia>
+          <Card>
+            <CardMedia
+              className={classes.media}
+              src={planpng && planpng[0].url}
+              title={unit}
+              component={"img"}
+            ></CardMedia>
+          </Card>
 
           {/*   <Divider style={{ margin: "20px 0" }} fullWidth /> */}
         </Grid>
@@ -73,7 +79,6 @@ const Unit = ({ data }) => {
 
       <Grid
         container
-        direction="row"
         justify="flex-start"
         spacing={2}
         style={{ marginTop: "40px" }}

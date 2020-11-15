@@ -2,6 +2,7 @@ import React from "react";
 import Units from "./Units";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 import {
   Container,
@@ -14,6 +15,7 @@ import {
   Checkbox,
   FormGroup,
   FormControlLabel,
+  FormLabel,
   TextField,
   Box,
   CircularProgress,
@@ -68,9 +70,21 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "contain",
   },
   container_filter: {
+    marginTop: "-20px",
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.secondary.main,
-    padding: "40px 45px",
+    padding: "40px 0",
+  },
+  container_grid: {
+    width: "1745px",
+    padding: "0 80px",
+    boxSizing: "border-box",
+  },
+  control: {
+    flexDirection: "row",
+    color: theme.palette.background.default,
+  },
+  "$root.MuiFormLabel-root	:": {
+    color: theme.palette.background.default,
   },
 }));
 
@@ -132,25 +146,24 @@ const UnitList = ({ combineUnits }) => {
     sqFt,
   };
 
-  const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <>
-      <Container maxWidth={false} disableGutters>
+      <Container maxWidth={false} className={classes.container_filter}>
         <Grid
-          className={classes.container_filter}
           container
-          justify="space-around"
           alignItems="flex-start"
+          justify="space-between"
+          className={classes.container_grid}
         >
-          <Grid item xs={3}>
-            <Typography variant="h1">Find your home</Typography>
+          <Grid item>
+            <Typography variant="h1" color="secondary">
+              Find your home
+            </Typography>
           </Grid>
 
-          <Grid item md={2}>
-            <FormControl>
+          <Grid item>
+            <FormControl className={classes.control}>
+              <FormLabel component="legend">Room type</FormLabel>
               <FormGroup>
                 {bedRooms.map((a, i) => {
                   return (
@@ -172,6 +185,7 @@ const UnitList = ({ combineUnits }) => {
                                 : []
                             );
                           }}
+                          name={a.roomsLabel + " BEDROOM"}
                         />
                       }
                       label={a.roomsLabel + " BEDROOM"}
@@ -183,8 +197,9 @@ const UnitList = ({ combineUnits }) => {
               </FormGroup>
             </FormControl>
           </Grid>
-          <Grid item md={2}>
-            <FormControl>
+          <Grid item>
+            <FormControl className={classes.control}>
+              <FormLabel component="legend">Square Footage</FormLabel>
               <FormGroup>
                 {SquareFeets.map((s, i) => (
                   <FormControlLabel
@@ -203,6 +218,7 @@ const UnitList = ({ combineUnits }) => {
                             event.target.checked ? [...prev, s.sqFtLabel] : []
                           );
                         }}
+                        name={s.sqFtLabel}
                       />
                     }
                     label={s.sqFtLabel}
@@ -213,8 +229,9 @@ const UnitList = ({ combineUnits }) => {
               </FormGroup>
             </FormControl>
           </Grid>
-          <Grid item md={2}>
-            <FormControl>
+          <Grid item>
+            <FormControl className={classes.control}>
+              <FormLabel component="legend">Building</FormLabel>
               <FormGroup>
                 {edifice.map((e, i) => (
                   <FormControlLabel
@@ -235,6 +252,7 @@ const UnitList = ({ combineUnits }) => {
                               : []
                           );
                         }}
+                        name={e.buildingLabel}
                       />
                     }
                     label={e.buildingLabel}
@@ -247,7 +265,7 @@ const UnitList = ({ combineUnits }) => {
               </FormGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item>
             <Button
               onClick={() => {
                 setRooms([]);
@@ -262,26 +280,26 @@ const UnitList = ({ combineUnits }) => {
         </Grid>
       </Container>
 
-      {filteredUnits.length ? (
-        <Container>
-          <Pagination count={10} color="primary" />
-          <Units filteredUnits={filteredUnits} level={1} {...filters} />
-          <Units filteredUnits={filteredUnits} level={2} {...filters} />
-          <Units filteredUnits={filteredUnits} level={3} {...filters} />
-          <Units filteredUnits={filteredUnits} level={4} {...filters} />
-          <Units filteredUnits={filteredUnits} level={5} {...filters} />
-          <Units filteredUnits={filteredUnits} level={6} {...filters} />
-          <Units filteredUnits={filteredUnits} level={7} {...filters} />
-          <Units filteredUnits={filteredUnits} level={8} {...filters} />
-          <Units filteredUnits={filteredUnits} level={9} {...filters} />
-          <Units filteredUnits={filteredUnits} level={10} {...filters} />
-          <Units filteredUnits={filteredUnits} level={11} {...filters} />
-          <Units filteredUnits={filteredUnits} level={12} {...filters} />
-          <Units filteredUnits={filteredUnits} level={13} {...filters} />
-          <Units filteredUnits={filteredUnits} level={14} {...filters} />
-
-          <button onClick={() => scrollTop()}>TOP</button>
-        </Container>
+      {filteredUnits.length > 0 ? (
+        <>
+          <Container>
+            {/*    <Pagination count={10} color="primary" /> */}
+            <Units filteredUnits={filteredUnits} level={1} {...filters} />
+            <Units filteredUnits={filteredUnits} level={2} {...filters} />
+            <Units filteredUnits={filteredUnits} level={3} {...filters} />
+            <Units filteredUnits={filteredUnits} level={4} {...filters} />
+            <Units filteredUnits={filteredUnits} level={5} {...filters} />
+            <Units filteredUnits={filteredUnits} level={6} {...filters} />
+            <Units filteredUnits={filteredUnits} level={7} {...filters} />
+            <Units filteredUnits={filteredUnits} level={8} {...filters} />
+            <Units filteredUnits={filteredUnits} level={9} {...filters} />
+            <Units filteredUnits={filteredUnits} level={10} {...filters} />
+            <Units filteredUnits={filteredUnits} level={11} {...filters} />
+            <Units filteredUnits={filteredUnits} level={12} {...filters} />
+            <Units filteredUnits={filteredUnits} level={13} {...filters} />
+            <Units filteredUnits={filteredUnits} level={14} {...filters} />
+          </Container>
+        </>
       ) : (
         <Container>
           <Box textAlign="center" pt={14}>

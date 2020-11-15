@@ -34,18 +34,23 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
   },
 
-  card: { marginBottom: "20px", backgroundColor: "transparent" },
+  card: {
+    width: "355px",
+    marginBottom: "20px",
+    backgroundColor: "transparent",
+  },
   cardContent: { padding: 0 },
   cardActions: { padding: "10px 0" },
   media: {
     marginTop: "10px",
-    width: "365px",
+    maxWidth: "100%",
     height: "400px",
     objectFit: "contain",
     border: `1px solid  ${theme.palette.primary.main}`,
-    padding: "30px",
+    padding: "20px",
     boxSizing: "border-box",
   },
+  floor: {},
   control: {
     padding: theme.spacing(2),
   },
@@ -94,45 +99,47 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   }
 
   return (
-    <div style={{ padding: "0px 0 100px 0" }}>
+    <>
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
-        <Box component="span" m={1}>
+        <Box component="div" mt={8} className={classes.floor}>
           <Typography gutterBottom variant="h2">
             {level}
             {levelLabels()} floor
           </Typography>
         </Box>
       )}
-      <Grid container direction="row" spacing={4}>
+      <Grid container direction="row" spacing={6} justify="space-between">
         {filteredUnits
           .filter(
             (unit) =>
               unit.fields.availability === true &&
               unit.fields.level === String(level)
           )
+          .sort((a, b) => a.fields.unit - b.fields.unit)
           .map((u, index) => (
-            <Grid item xs>
+            <Grid item>
               <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="body1">
-                      BUILDING:<strong>{u.fields.building}</strong>
+                    <Typography variant="body1">
+                      BUILDING: <strong>{u.fields.building}</strong>
                     </Typography>
-                    <Typography gutterBottom variant="body1">
+                    <Typography variant="body1">
                       UNIT: <strong>{u.fields.unit}</strong>
                     </Typography>
-                    <Typography gutterBottom variant="body1">
+                    <Typography variant="body1">
                       SIZE: <strong>{u.fields.area}</strong>
                     </Typography>
-                    <Typography gutterBottom variant="body1">
+                    <Typography variant="body1">
                       BEDROOM:<strong> {u.fields.room}</strong>
                     </Typography>
-                    <Typography gutterBottom variant="body1">
+                    <Typography variant="body1">
                       FLOOR: <strong>{u.fields.level}</strong>
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.cardActions}>
                     <Button
+                      aria-label={`See more of unit ${u.fields.unit}`}
                       className={classes.more}
                       onClick={handleLocalStorage}
                       component={Link}
@@ -167,7 +174,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
             </Grid>
           ))}
       </Grid>
-    </div>
+    </>
   );
 };
 
