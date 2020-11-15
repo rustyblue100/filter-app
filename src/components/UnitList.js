@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     height: "24px",
     color: theme.palette.background.default,
   },
+
+  FormControlLabel: { color: "red" },
   icon: {
     borderRadius: 0,
     width: 16,
@@ -75,16 +77,26 @@ const useStyles = makeStyles((theme) => ({
     padding: "40px 0",
   },
   container_grid: {
-    width: "1745px",
+    maxWidth: "1745px",
     padding: "0 80px",
     boxSizing: "border-box",
+  },
+  form_label: {
+    marginTop: "3px",
+    color: theme.palette.background.default,
+    textTransform: "uppercase",
+    paddingRight: "15px",
+    fontWeight: 700,
   },
   control: {
     flexDirection: "row",
     color: theme.palette.background.default,
   },
-  "$root.MuiFormLabel-root	:": {
+  reset: {
+    /*    textTransform: "lowercase", */
     color: theme.palette.background.default,
+    fontSize: "12px",
+    marginTop: "-7px",
   },
 }));
 
@@ -163,14 +175,22 @@ const UnitList = ({ combineUnits }) => {
 
           <Grid item>
             <FormControl className={classes.control}>
-              <FormLabel component="legend">Room type</FormLabel>
-              <FormGroup>
+              <FormLabel
+                component="legend"
+                className={classes.form_label}
+                focused={false}
+              >
+                Room
+                <br /> type
+              </FormLabel>
+              <FormGroup className={classes.label}>
                 {bedRooms.map((a, i) => {
                   return (
                     <FormControlLabel
                       key={i}
                       control={
                         <Checkbox
+                          disableRipple={true}
                           classes={{
                             root: classes.root,
                             checked: classes.checked,
@@ -199,13 +219,20 @@ const UnitList = ({ combineUnits }) => {
           </Grid>
           <Grid item>
             <FormControl className={classes.control}>
-              <FormLabel component="legend">Square Footage</FormLabel>
+              <FormLabel
+                component="legend"
+                className={classes.form_label}
+                focused={false}
+              >
+                Square <br /> Footage
+              </FormLabel>
               <FormGroup>
                 {SquareFeets.map((s, i) => (
                   <FormControlLabel
                     key={i}
                     control={
                       <Checkbox
+                        disableRipple={true}
                         classes={{
                           root: classes.root,
                           checked: classes.checked,
@@ -231,13 +258,20 @@ const UnitList = ({ combineUnits }) => {
           </Grid>
           <Grid item>
             <FormControl className={classes.control}>
-              <FormLabel component="legend">Building</FormLabel>
+              <FormLabel
+                component="legend"
+                className={classes.form_label}
+                focused={false}
+              >
+                Building
+              </FormLabel>
               <FormGroup>
                 {edifice.map((e, i) => (
                   <FormControlLabel
                     key={i}
                     control={
                       <Checkbox
+                        disableRipple={true}
                         classes={{
                           root: classes.root,
                           checked: classes.checked,
@@ -267,6 +301,7 @@ const UnitList = ({ combineUnits }) => {
           </Grid>
           <Grid item>
             <Button
+              className={classes.reset}
               onClick={() => {
                 setRooms([]);
                 setBuilding([]);

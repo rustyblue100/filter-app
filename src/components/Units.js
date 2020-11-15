@@ -108,7 +108,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           </Typography>
         </Box>
       )}
-      <Grid container direction="row" spacing={6} justify="space-between">
+      <Grid container direction="row" spacing={6}>
         {filteredUnits
           .filter(
             (unit) =>
@@ -117,7 +117,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           )
           .sort((a, b) => a.fields.unit - b.fields.unit)
           .map((u, index) => (
-            <Grid item>
+            <Grid item md={3}>
               <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>

@@ -23,7 +23,11 @@ const theme = createMuiTheme({
         padding: 0,
       },
     },
-
+    MuiFormControlLabel: {
+      label: {
+        fontSize: "14px",
+      },
+    },
     /*     MuiCardContent: {
       root: {
         padding: 0,
