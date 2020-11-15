@@ -29,12 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Unit = ({ data }) => {
-  console.log(useLocation());
   const classes = useStyles();
-  const restoreId = useLocation().state.id;
-  /*   const roomsState = useLocation().state.rooms; */
-
-  console.log(restoreId);
+  const restoreId = useLocation().state.level;
 
   const { unitNumber } = useParams();
 
@@ -51,7 +47,7 @@ const Unit = ({ data }) => {
       <Link
         to={{
           pathname: "/",
-          state: { id: restoreId },
+          state: { level: restoreId },
         }}
       >
         <Button>back</Button>

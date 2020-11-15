@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.background.default,
   },
 
-  FormControlLabel: { color: "red" },
   icon: {
     borderRadius: 0,
     width: 16,
@@ -87,16 +86,25 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     paddingRight: "15px",
     fontWeight: 700,
+    [theme.breakpoints.down("xs")]: { fontSize: "14px" },
   },
   control: {
     flexDirection: "row",
     color: theme.palette.background.default,
+    [theme.breakpoints.down("xs")]: { paddingTop: "24px" },
   },
   reset: {
     /*    textTransform: "lowercase", */
     color: theme.palette.background.default,
     fontSize: "12px",
     marginTop: "-7px",
+    [theme.breakpoints.down("sm")]: { paddingTop: "24px" },
+  },
+  page_title: {
+    [theme.breakpoints.down("xs")]: {},
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "20px",
+    },
   },
 }));
 
@@ -167,13 +175,17 @@ const UnitList = ({ combineUnits }) => {
           justify="space-between"
           className={classes.container_grid}
         >
-          <Grid item>
-            <Typography variant="h1" color="secondary">
+          <Grid item sm={12} md={3}>
+            <Typography
+              variant="h1"
+              color="secondary"
+              className={classes.page_title}
+            >
               Find your home
             </Typography>
           </Grid>
 
-          <Grid item>
+          <Grid item sm={6} md={2}>
             <FormControl className={classes.control}>
               <FormLabel
                 component="legend"
@@ -217,7 +229,7 @@ const UnitList = ({ combineUnits }) => {
               </FormGroup>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item sm={6} md={2}>
             <FormControl className={classes.control}>
               <FormLabel
                 component="legend"
@@ -256,7 +268,7 @@ const UnitList = ({ combineUnits }) => {
               </FormGroup>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item sm={6} md={2}>
             <FormControl className={classes.control}>
               <FormLabel
                 component="legend"
@@ -299,7 +311,7 @@ const UnitList = ({ combineUnits }) => {
               </FormGroup>
             </FormControl>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={6} md={2}>
             <Button
               className={classes.reset}
               onClick={() => {

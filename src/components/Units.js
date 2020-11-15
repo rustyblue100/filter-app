@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
-    width: "355px",
+    maxWidth: "355px",
     marginBottom: "20px",
     backgroundColor: "transparent",
   },
@@ -55,20 +55,25 @@ const useStyles = makeStyles((theme) => ({
   },
   floor: {},
   control: {
-    padding: theme.spacing(2),
+    /*     padding: theme.spacing(2), */
   },
 }));
 
 const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   const classes = useStyles();
   const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
-    const item = document.getElementById(`restore-${location.state.id}`);
+    const item =
+      location.state &&
+      document.getElementById(`restore-${location.state.level}`);
 
     if (item) {
-      return item.scrollIntoView();
+      return item.scrollIntoView(true);
     }
+
+    window.history.replaceState(null, "");
   }, [location]);
 
   // Change level labels
@@ -104,14 +109,18 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   return (
     <div style={{ paddingTop: "40px" }}>
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
-        <Box component="div" className={classes.floor}>
+        <Box
+          component="div"
+          className={classes.floor}
+          id={`restore-${String(level)}`}
+        >
           <Typography gutterBottom variant="h2">
             {level}
             {levelLabels()} floor
           </Typography>
         </Box>
       )}
-      <Grid container direction="row" spacing={6}>
+      <Grid container direction="row" spacing={2}>
         {filteredUnits
           .filter(
             (unit) =>
@@ -120,12 +129,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           )
           .sort((a, b) => a.fields.unit - b.fields.unit)
           .map((u, index) => (
-            <Grid
-              item
-              md={3}
-              key={`restore-${u.id}`}
-              id={`restore-${u.fields.unit}`}
-            >
+            <Grid item xs={12} sm={6} md={3} key={`restore-${u.id}`}>
               <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
@@ -153,7 +157,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                       component={Link}
                       to={{
                         pathname: `/unit/${u.fields.unit}`,
-                        state: { id: u.fields.unit },
+                        state: { level: u.fields.level },
                       }}
                       color="secondary"
                       variant="contained"
