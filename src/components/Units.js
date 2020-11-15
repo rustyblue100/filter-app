@@ -62,13 +62,12 @@ const useStyles = makeStyles((theme) => ({
 const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   const classes = useStyles();
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
-    const item = document.querySelector(`restore-${location.state.id}`);
-    console.log("useEffet " + location.state.id);
+    const item = document.getElementById(`restore-${location.state.id}`);
+
     if (item) {
-      item.scrollIntoView();
+      return item.scrollIntoView();
     }
   }, [location]);
 
@@ -125,7 +124,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
               item
               md={3}
               key={`restore-${u.id}`}
-              className={`restore-${u.fields.unit}`}
+              id={`restore-${u.fields.unit}`}
             >
               <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>

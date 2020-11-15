@@ -51,7 +51,7 @@ const Unit = ({ data }) => {
       <Link
         to={{
           pathname: "/",
-          state: {},
+          state: { id: restoreId },
         }}
       >
         <Button>back</Button>
