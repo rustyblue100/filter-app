@@ -31,9 +31,11 @@ const useStyles = makeStyles((theme) => ({
 const Unit = ({ data }) => {
   console.log(useLocation());
   const classes = useStyles();
-  /*   const restoreId = useLocation().state.id;
-  const roomsState = useLocation().state.rooms;
- */
+  const restoreId = useLocation().state.id;
+  /*   const roomsState = useLocation().state.rooms; */
+
+  console.log(restoreId);
+
   const { unitNumber } = useParams();
 
   const unitData = data.filter(

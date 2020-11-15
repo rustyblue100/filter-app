@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <footer>
       <nav>
-        <div class="row">
+        <div className="row">
           <ul>
             <li>
               <a href="#">THE VILLAGE - 125 AND 133 BRONTE RD, OAKVILLE</a>

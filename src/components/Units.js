@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "3px 23px",
     fontFamily: theme.typography.body2.family,
     fontSize: "20px",
+    /*     "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+    }, */
   },
 
   card: {
@@ -59,14 +62,15 @@ const useStyles = makeStyles((theme) => ({
 const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   const classes = useStyles();
   const location = useLocation();
+  console.log(location);
 
-  /*  useEffect(() => {
-    const item = document.querySelector(".restore-" + location.state.id);
-    console.log(item);
+  useEffect(() => {
+    const item = document.querySelector(`restore-${location.state.id}`);
+    console.log("useEffet " + location.state.id);
     if (item) {
       item.scrollIntoView();
     }
-  }, [location]); */
+  }, [location]);
 
   // Change level labels
   function levelLabels() {
@@ -99,9 +103,9 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   }
 
   return (
-    <>
+    <div style={{ paddingTop: "40px" }}>
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
-        <Box component="div" mt={8} className={classes.floor}>
+        <Box component="div" className={classes.floor}>
           <Typography gutterBottom variant="h2">
             {level}
             {levelLabels()} floor
@@ -117,7 +121,12 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           )
           .sort((a, b) => a.fields.unit - b.fields.unit)
           .map((u, index) => (
-            <Grid item md={3}>
+            <Grid
+              item
+              md={3}
+              key={`restore-${u.id}`}
+              className={`restore-${u.fields.unit}`}
+            >
               <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
@@ -155,11 +164,6 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                   </CardActions>
 
                   <CardMedia
-                    onClick={handleLocalStorage}
-                    to={{
-                      pathname: `/unit/${u.fields.unit}`,
-                      state: { id: u.fields.unit },
-                    }}
                     className={`${classes.media}`}
                     image={
                       u.fields.planpng &&
@@ -174,7 +178,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
             </Grid>
           ))}
       </Grid>
-    </>
+    </div>
   );
 };
 

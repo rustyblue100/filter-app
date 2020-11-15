@@ -80,7 +80,7 @@ const Header = () => {
         </nav>
 
         <div className="burger-menu">
-          <svg height="20" viewbox="0 0 100 80" width="20">
+          <svg height="20" viewBox="0 0 100 80" width="20">
             <rect height="10" width="60%"></rect>
             <rect height="10" width="60%" y="30"></rect>
             <rect height="10" width="60%" y="60"></rect>
