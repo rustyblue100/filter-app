@@ -6,25 +6,31 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import {
   Container,
-  Grid,
+  Box,
   Card,
   CardMedia,
   Typography,
   Input,
   Button,
   Divider,
+  Grid,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  card: {
+  root: {
+    flexGrow: 1,
+  },
+  back: {},
+  figure: {
     padding: 0,
+    margin: 0,
     backgroundColor: theme.palette.background.default,
   },
   media: {
-    width: 460,
+    maxWidth: "100%",
     height: "auto",
+    maxHeight: "58vh",
     objectFit: "contain",
-    backgroundColor: theme.palette.background.default,
   },
 }));
 
@@ -43,55 +49,85 @@ const Unit = ({ data }) => {
     : "";
 
   return (
-    <Container>
-      <Link
-        to={{
-          pathname: "/",
-          state: { level: restoreId },
-        }}
-      >
-        <Button>back</Button>
-      </Link>
+    <Container className={classes.root}>
+      <Box>
+        <Typography
+          variant="h1"
+          style={{ fontFamily: "'Montserrat', sans-serif" }}
+        >
+          Unit {unit}
+        </Typography>
+      </Box>
+      <Box mt={1} mb={2}>
+        <Button
+          className={classes.back}
+          size="small"
+          to={{
+            pathname: "/",
+            state: { level: restoreId },
+          }}
+          component={Link}
+          variant="outlined"
+          color="secondary"
+        >
+          back
+        </Button>
+      </Box>
 
-      <Grid container alignItems="flex-start">
-        <Grid item md={8}>
-          <Card>
-            <CardMedia
-              className={classes.media}
-              src={planpng && planpng[0].url}
-              title={unit}
-              component={"img"}
-            ></CardMedia>
-          </Card>
+      <Grid container spacing={2} mt={2}>
+        <Grid item container xs={12} md={6}>
+          <Grid item sm={12} md={8}>
+            <Grid component="figure" className={classes.figure}>
+              <img
+                className={classes.media}
+                src={planpng && planpng[0].url}
+                title={`unit ${unit}`}
+                alt={`unit ${unit}`}
+              />
+            </Grid>
+          </Grid>
 
-          {/*   <Divider style={{ margin: "20px 0" }} fullWidth /> */}
+          <Grid item sm={12} md={4} style={{ alignSelf: "end" }}>
+            <img
+              src={keyplan && keyplan[0].thumbnails.large.url}
+              alt={unit}
+              width="100"
+            />
+          </Grid>
         </Grid>
 
-        <Grid item md={4}>
-          <Button href={Planpdf && Planpdf[0].url} variant="outlined">
+        <Grid item sm={12} md={6}>
+          <Button
+            href={Planpdf && Planpdf[0].url}
+            color="primary"
+            variant="contained"
+          >
             Download pdf
           </Button>
-          <ContactForm />
+
+          <Box mt={8}>
+            <ContactForm />
+          </Box>
         </Grid>
       </Grid>
 
-      <Grid
+      {/*       <Box
         container
         justify="flex-start"
         spacing={2}
         style={{ marginTop: "40px" }}
       >
-        <Grid item>
+        <Box item>
           <img
             src={keyplan && keyplan[0].thumbnails.large.url}
             alt={unit}
             width="100"
           />
-        </Grid>
-        <Grid item>
+        </Box>
+        <Box item>
           <span>{unit}</span> <span>{building}</span>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box> */}
     </Container>
   );
 };

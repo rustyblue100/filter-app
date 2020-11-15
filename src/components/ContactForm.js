@@ -59,7 +59,7 @@ const MaterialUiForm = () => {
         placeholder="Message"
         inputProps={{ "aria-label": "Message" }}
         multiline
-        rows={4}
+        rows={8}
       />
       <Button type="submit" fullWidth>
         Submit

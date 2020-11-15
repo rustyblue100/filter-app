@@ -73,13 +73,9 @@ const useStyles = makeStyles((theme) => ({
   container_filter: {
     marginTop: "-20px",
     backgroundColor: theme.palette.primary.main,
-    padding: "40px 0",
+    padding: "40px 0px",
   },
-  container_grid: {
-    maxWidth: "1745px",
-    padding: "0 80px",
-    boxSizing: "border-box",
-  },
+  container_grid: {},
   form_label: {
     marginTop: "3px",
     color: theme.palette.background.default,
@@ -169,35 +165,81 @@ const UnitList = ({ combineUnits }) => {
   return (
     <>
       <Container maxWidth={false} className={classes.container_filter}>
-        <Grid
-          container
-          alignItems="flex-start"
-          justify="space-between"
-          className={classes.container_grid}
-        >
-          <Grid item sm={12} md={3}>
-            <Typography
-              variant="h1"
-              color="secondary"
-              className={classes.page_title}
-            >
-              Find your home
-            </Typography>
-          </Grid>
-
-          <Grid item sm={6} md={2}>
-            <FormControl className={classes.control}>
-              <FormLabel
-                component="legend"
-                className={classes.form_label}
-                focused={false}
+        <Container>
+          <Grid
+            container
+            alignItems="flex-start"
+            justify="space-between"
+            direction="row"
+            spacing={2}
+          >
+            <Grid item sm={12} md={3}>
+              <Typography
+                variant="h1"
+                color="secondary"
+                className={classes.page_title}
               >
-                Room
-                <br /> type
-              </FormLabel>
-              <FormGroup className={classes.label}>
-                {bedRooms.map((a, i) => {
-                  return (
+                Find your home
+              </Typography>
+            </Grid>
+
+            <Grid item sm={6} md={2}>
+              <FormControl className={classes.control}>
+                <FormLabel
+                  component="legend"
+                  className={classes.form_label}
+                  focused={false}
+                >
+                  Room
+                  <br /> type
+                </FormLabel>
+                <FormGroup className={classes.label}>
+                  {bedRooms.map((a, i) => {
+                    return (
+                      <FormControlLabel
+                        key={i}
+                        control={
+                          <Checkbox
+                            disableRipple={true}
+                            classes={{
+                              root: classes.root,
+                              checked: classes.checked,
+                            }}
+                            icon={<span className={classes.icon} />}
+                            checkedIcon={
+                              <span className={classes.checkedIcon} />
+                            }
+                            onChange={(event) => {
+                              sessionStorage.clear();
+                              setRooms((prev) =>
+                                event.target.checked
+                                  ? [...prev, a.roomsLabel]
+                                  : []
+                              );
+                            }}
+                            name={a.roomsLabel + " BEDROOM"}
+                          />
+                        }
+                        label={a.roomsLabel + " BEDROOM"}
+                        value={a.roomsLabel}
+                        checked={rooms && rooms.includes(a.roomsLabel) && true}
+                      />
+                    );
+                  })}
+                </FormGroup>
+              </FormControl>
+            </Grid>
+            <Grid item sm={6} md={2}>
+              <FormControl className={classes.control}>
+                <FormLabel
+                  component="legend"
+                  className={classes.form_label}
+                  focused={false}
+                >
+                  Square <br /> Footage
+                </FormLabel>
+                <FormGroup>
+                  {SquareFeets.map((s, i) => (
                     <FormControlLabel
                       key={i}
                       control={
@@ -211,120 +253,79 @@ const UnitList = ({ combineUnits }) => {
                           checkedIcon={<span className={classes.checkedIcon} />}
                           onChange={(event) => {
                             sessionStorage.clear();
-                            setRooms((prev) =>
+                            setSqFt((prev) =>
+                              event.target.checked ? [...prev, s.sqFtLabel] : []
+                            );
+                          }}
+                          name={s.sqFtLabel}
+                        />
+                      }
+                      label={s.sqFtLabel}
+                      value={s.sqFtLabel}
+                      checked={sqFt && sqFt.includes(s.sqFtLabel) && true}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+            </Grid>
+            <Grid item sm={6} md={2}>
+              <FormControl className={classes.control}>
+                <FormLabel
+                  component="legend"
+                  className={classes.form_label}
+                  focused={false}
+                >
+                  Building
+                </FormLabel>
+                <FormGroup>
+                  {edifice.map((e, i) => (
+                    <FormControlLabel
+                      key={i}
+                      control={
+                        <Checkbox
+                          disableRipple={true}
+                          classes={{
+                            root: classes.root,
+                            checked: classes.checked,
+                          }}
+                          icon={<span className={classes.icon} />}
+                          checkedIcon={<span className={classes.checkedIcon} />}
+                          onChange={(event) => {
+                            sessionStorage.clear();
+                            setBuilding((prev) =>
                               event.target.checked
-                                ? [...prev, a.roomsLabel]
+                                ? [...prev, e.buildingLabel]
                                 : []
                             );
                           }}
-                          name={a.roomsLabel + " BEDROOM"}
+                          name={e.buildingLabel}
                         />
                       }
-                      label={a.roomsLabel + " BEDROOM"}
-                      value={a.roomsLabel}
-                      checked={rooms && rooms.includes(a.roomsLabel) && true}
+                      label={e.buildingLabel}
+                      value={e.buildingLabel}
+                      checked={
+                        buildings && buildings.includes(e.buildingLabel) && true
+                      }
                     />
-                  );
-                })}
-              </FormGroup>
-            </FormControl>
-          </Grid>
-          <Grid item sm={6} md={2}>
-            <FormControl className={classes.control}>
-              <FormLabel
-                component="legend"
-                className={classes.form_label}
-                focused={false}
+                  ))}
+                </FormGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6} md={1}>
+              <Button
+                className={classes.reset}
+                onClick={() => {
+                  setRooms([]);
+                  setBuilding([]);
+                  setSqFt([]);
+                  sessionStorage.clear();
+                }}
               >
-                Square <br /> Footage
-              </FormLabel>
-              <FormGroup>
-                {SquareFeets.map((s, i) => (
-                  <FormControlLabel
-                    key={i}
-                    control={
-                      <Checkbox
-                        disableRipple={true}
-                        classes={{
-                          root: classes.root,
-                          checked: classes.checked,
-                        }}
-                        icon={<span className={classes.icon} />}
-                        checkedIcon={<span className={classes.checkedIcon} />}
-                        onChange={(event) => {
-                          sessionStorage.clear();
-                          setSqFt((prev) =>
-                            event.target.checked ? [...prev, s.sqFtLabel] : []
-                          );
-                        }}
-                        name={s.sqFtLabel}
-                      />
-                    }
-                    label={s.sqFtLabel}
-                    value={s.sqFtLabel}
-                    checked={sqFt && sqFt.includes(s.sqFtLabel) && true}
-                  />
-                ))}
-              </FormGroup>
-            </FormControl>
+                reset filters
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item sm={6} md={2}>
-            <FormControl className={classes.control}>
-              <FormLabel
-                component="legend"
-                className={classes.form_label}
-                focused={false}
-              >
-                Building
-              </FormLabel>
-              <FormGroup>
-                {edifice.map((e, i) => (
-                  <FormControlLabel
-                    key={i}
-                    control={
-                      <Checkbox
-                        disableRipple={true}
-                        classes={{
-                          root: classes.root,
-                          checked: classes.checked,
-                        }}
-                        icon={<span className={classes.icon} />}
-                        checkedIcon={<span className={classes.checkedIcon} />}
-                        onChange={(event) => {
-                          sessionStorage.clear();
-                          setBuilding((prev) =>
-                            event.target.checked
-                              ? [...prev, e.buildingLabel]
-                              : []
-                          );
-                        }}
-                        name={e.buildingLabel}
-                      />
-                    }
-                    label={e.buildingLabel}
-                    value={e.buildingLabel}
-                    checked={
-                      buildings && buildings.includes(e.buildingLabel) && true
-                    }
-                  />
-                ))}
-              </FormGroup>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6} md={2}>
-            <Button
-              className={classes.reset}
-              onClick={() => {
-                setRooms([]);
-                setBuilding([]);
-                setSqFt([]);
-                sessionStorage.clear();
-              }}
-            >
-              reset filters
-            </Button>
-          </Grid>
-        </Grid>
+        </Container>
       </Container>
 
       {filteredUnits.length > 0 ? (

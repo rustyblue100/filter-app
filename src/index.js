@@ -23,6 +23,13 @@ const theme = createMuiTheme({
         padding: 0,
       },
     },
+    MuiButton: {
+      root: {
+        fontFamily: "'Unna', sans-serif",
+        padding: "3px 23px",
+        fontSize: "20px",
+      },
+    },
     MuiFormControlLabel: {
       label: {
         fontSize: "14px",

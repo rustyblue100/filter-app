@@ -29,9 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   more: {
     color: theme.palette.background.default,
-    padding: "3px 23px",
-    fontFamily: theme.typography.body2.family,
-    fontSize: "20px",
+
     /*     "&:hover": {
       backgroundColor: theme.palette.primary.main,
     }, */
