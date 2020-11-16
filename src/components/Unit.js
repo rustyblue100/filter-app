@@ -32,7 +32,13 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     maxHeight: "58vh",
     objectFit: "contain",
+    [theme.breakpoints.down("sm")]: { paddingBottom: "1rem" },
+
     [theme.breakpoints.down("md")]: { maxHeight: "50vh" },
+  },
+
+  contact: {
+    [theme.breakpoints.down("sm")]: { paddingBottom: "12rem" },
   },
 }));
 
@@ -93,17 +99,24 @@ const Unit = ({ data }) => {
               <img
                 className={classes.media}
                 src={planpng && planpng[0].url}
-                title={`unit ${unit}`}
-                alt={`unit ${unit}`}
+                title={`unit ${unit} in building ${building}`}
+                alt={`unit ${unit} in building ${building}`}
               />
             </Grid>
           </Grid>
 
-          <Grid item sm={12} md={5} style={{ alignSelf: "flex-end" }}>
+          <Grid
+            component="figure"
+            item
+            sm={12}
+            md={5}
+            style={{ alignSelf: "flex-end" }}
+          >
             <img
               src={keyplan && keyplan[0].thumbnails.large.url}
-              alt={unit}
               width="100"
+              title={`keyplan of unit ${unit} in building ${building}`}
+              alt={`keyplan of unit ${unit} in building ${building}`}
             />
           </Grid>
         </Grid>
@@ -117,7 +130,7 @@ const Unit = ({ data }) => {
             Download pdf
           </Button>
 
-          <Box mt={4}>
+          <Box mt={4} className={classes.contact}>
             <ContactForm />
           </Box>
         </Grid>

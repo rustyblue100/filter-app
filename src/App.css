@@ -101,20 +101,14 @@ header nav ul li .active {
 .mobile-menu {
   text-align: center;
   width: 100%;
-  display: none;
+  display: block;
   transition: all 0.4s;
-}
-
-.burger-menu {
-  display: none;
 }
 
 @media only screen and (max-width: 1200px) {
   .burger-menu {
-    display: block;
     padding: 6px;
     margin: 5px 0 0 5px;
-    display: block;
     position: absolute;
     top: 30px;
     border-radius: 25px 25px 25px 25px;
@@ -144,10 +138,15 @@ header nav ul li .active {
   }
 }
 
+@media only screen and (min-width: 1200px) {
+  .burger-menu {
+    display: none;
+  }
+}
+
 .burger-menu__close {
   font-size: 20px;
   z-index: 999;
-  display: none;
 }
 
 .mobile-menu ul {
