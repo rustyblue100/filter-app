@@ -147,7 +147,7 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      {/*    <Header /> */}
       <Router>
         <div className="App"></div>
         <Switch>
@@ -164,7 +164,7 @@ const App = () => {
           />
         </Switch>
       </Router>
-      <Footer />
+      {/*     <Footer /> */}
     </>
   );
 };
