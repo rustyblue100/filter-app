@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Unit = ({ data }) => {
   const classes = useStyles();
-  const restoreId = useLocation().state.level;
+  const location = useLocation();
+  const restoreId = location.state ? location.state.level : 1;
 
   const { unitNumber, buildingId } = useParams();
   console.log(useParams());
