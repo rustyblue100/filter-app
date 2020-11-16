@@ -71,7 +71,6 @@ const Header = () => {
             </ul>
           </div>
         </nav>
-
         <div
           className={`burger-menu ${mobileIsOpen ? "active" : ""}`}
           onClick={() => handleOnclick()}
