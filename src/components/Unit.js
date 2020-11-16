@@ -123,6 +123,8 @@ const Unit = ({ data }) => {
 
         <Grid item sm={12} md={5}>
           <Button
+            target="_blank"
+            rel="noopener"
             href={Planpdf && Planpdf[0].url}
             color="primary"
             variant="contained"
