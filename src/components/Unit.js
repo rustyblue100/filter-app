@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 
 import { Link, useParams, useLocation } from "react-router-dom";
 import ContactForm from "./ContactForm";
@@ -62,83 +63,98 @@ const Unit = ({ data }) => {
     : "";
 
   return (
-    <Container className={classes.root}>
-      <Box mt={3}>
-        <Typography
-          variant="h1"
-          style={{ fontFamily: "'Montserrat', sans-serif" }}
-        >
-          Unit {unit} {building}
-        </Typography>
-      </Box>
-      <Box mt={1} mb={2}>
-        <Button
-          style={{
-            padding: 0,
-            minHeight: 0,
-            minWidth: 0,
-          }}
-          startIcon={<ArrowBackIcon />}
-          className={classes.back}
-          size="medium"
-          to={{
-            pathname: "/",
-            state: { level: restoreId },
-          }}
-          component={Link}
-          color="secondary"
-        >
-          back
-        </Button>
-      </Box>
+    <motion.div exit={{ opacity: 0 }} initial="initial" animate="animate">
+      <Container className={classes.root}>
+        <Box mt={3}>
+          <Typography
+            variant="h1"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
+            Unit {unit} {building}
+          </Typography>
+        </Box>
+        <Box mt={1} mb={2}>
+          <Button
+            style={{
+              padding: 0,
+              minHeight: 0,
+              minWidth: 0,
+            }}
+            startIcon={<ArrowBackIcon />}
+            className={classes.back}
+            size="medium"
+            to={{
+              pathname: "/",
+              state: { level: restoreId },
+            }}
+            component={Link}
+            color="secondary"
+          >
+            back
+          </Button>
+        </Box>
 
-      <Grid container spacing={2} mt={2}>
-        <Grid item container xs={12} md={7}>
-          <Grid item sm={12} md={7}>
-            <Grid component="figure" className={classes.figure}>
-              <img
-                className={classes.media}
-                src={planpng && planpng[0].url}
-                title={`unit ${unit} in building ${building}`}
-                alt={`unit ${unit} in building ${building}`}
+        <Grid container spacing={2} mt={2}>
+          <Grid item container xs={12} md={7}>
+            <Grid item sm={12} md={7}>
+              <Grid component="figure" className={classes.figure}>
+                <motion.img
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className={classes.media}
+                  src={planpng && planpng[0].url}
+                  title={`unit ${unit} in building ${building}`}
+                  alt={`unit ${unit} in building ${building}`}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid
+              component="figure"
+              item
+              sm={12}
+              md={5}
+              style={{ alignSelf: "flex-end" }}
+            >
+              <motion.img
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                src={keyplan && keyplan[0].thumbnails.large.url}
+                width="100"
+                title={`keyplan of unit ${unit} in building ${building}`}
+                alt={`keyplan of unit ${unit} in building ${building}`}
               />
             </Grid>
           </Grid>
 
-          <Grid
-            component="figure"
-            item
-            sm={12}
-            md={5}
-            style={{ alignSelf: "flex-end" }}
-          >
-            <img
-              src={keyplan && keyplan[0].thumbnails.large.url}
-              width="100"
-              title={`keyplan of unit ${unit} in building ${building}`}
-              alt={`keyplan of unit ${unit} in building ${building}`}
-            />
+          <Grid item sm={12} md={5}>
+            <Box>
+              <motion.div
+                initial={{ y: 0, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
+                <Button
+                  target="_blank"
+                  rel="noopener"
+                  href={Planpdf && Planpdf[0].url}
+                  color="primary"
+                  variant="contained"
+                >
+                  Download pdf
+                </Button>
+
+                <motion.Box mt={4} className={classes.contact}>
+                  <ContactForm />
+                </motion.Box>
+              </motion.div>
+            </Box>
           </Grid>
         </Grid>
 
-        <Grid item sm={12} md={5}>
-          <Button
-            target="_blank"
-            rel="noopener"
-            href={Planpdf && Planpdf[0].url}
-            color="primary"
-            variant="contained"
-          >
-            Download pdf
-          </Button>
-
-          <Box mt={4} className={classes.contact}>
-            <ContactForm />
-          </Box>
-        </Grid>
-      </Grid>
-
-      {/*       <Box
+        {/*       <Box
         container
         justify="flex-start"
         spacing={2}
@@ -155,7 +171,8 @@ const Unit = ({ data }) => {
           <span>{unit}</span> <span>{building}</span>
         </Box>
       </Box> */}
-    </Container>
+      </Container>
+    </motion.div>
   );
 };
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import LazyLoad from "react-lazyload";
 import { Link, useParams, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import {
   Container,
@@ -15,6 +16,18 @@ import {
   CardActions,
   Box,
 } from "@material-ui/core";
+
+const easing = [0.6, -0.05, 0.01, 0.99];
+
+const fadeInUp = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: { duration: 0.6, ease: easing },
+  },
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,7 +117,12 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   }
 
   return (
-    <div style={{ paddingTop: "40px" }}>
+    <motion.div
+      style={{ paddingTop: "40px" }}
+      exit={{ opacity: 0 }}
+      initial="initial"
+      animate="animate"
+    >
       {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
         <Box
           component="div"
@@ -180,7 +198,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
             </Grid>
           ))}
       </Grid>
-    </div>
+    </motion.div>
   );
 };
 
