@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   container_filter: {
     marginTop: "-20px",
     backgroundColor: theme.palette.primary.main,
-    padding: "53px 0px 23px 0",
+    padding: "60px 0px 30px 0",
   },
   container_grid: {},
   form_label: {
