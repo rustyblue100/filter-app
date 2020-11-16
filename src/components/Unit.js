@@ -48,6 +48,10 @@ const Unit = ({ data }) => {
   const location = useLocation();
   const restoreId = location.state ? location.state.level : 1;
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { unitNumber, buildingId } = useParams();
   console.log(useParams());
 
