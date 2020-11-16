@@ -79,6 +79,10 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
       location.state &&
       document.getElementById(`restore-${location.state.level}`);
 
+    if (location.state && location.state.level === "1") {
+      return window.scrollTo(0, 0);
+    }
+
     if (item) {
       return item.scrollIntoView(true);
     }
