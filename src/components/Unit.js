@@ -40,10 +40,14 @@ const Unit = ({ data }) => {
   const classes = useStyles();
   const restoreId = useLocation().state.level;
 
-  const { unitNumber } = useParams();
+  const { unitNumber, buildingId } = useParams();
+  console.log(useParams());
 
   const unitData = data.filter(
-    (unit) => unit.fields && unit.fields.unit === unitNumber
+    (unit) =>
+      unit.fields &&
+      unit.fields.unit === unitNumber &&
+      unit.fields.building.toLowerCase() === buildingId
   );
 
   const { unit, area, building, planpng, keyplan, Planpdf } = unitData[0]
@@ -57,11 +61,16 @@ const Unit = ({ data }) => {
           variant="h1"
           style={{ fontFamily: "'Montserrat', sans-serif" }}
         >
-          Unit {unit}
+          Unit {unit} {building}
         </Typography>
       </Box>
       <Box mt={1} mb={2}>
         <Button
+          style={{
+            padding: 0,
+            minHeight: 0,
+            minWidth: 0,
+          }}
           startIcon={<ArrowBackIcon />}
           className={classes.back}
           size="medium"
@@ -77,7 +86,7 @@ const Unit = ({ data }) => {
       </Box>
 
       <Grid container spacing={2} mt={2}>
-        <Grid item container xs={12} md={6}>
+        <Grid item container xs={12} md={7}>
           <Grid item sm={12} md={7}>
             <Grid component="figure" className={classes.figure}>
               <img
@@ -89,7 +98,7 @@ const Unit = ({ data }) => {
             </Grid>
           </Grid>
 
-          <Grid item sm={12} md={5} style={{ alignSelf: "end" }}>
+          <Grid item sm={12} md={5} style={{ alignSelf: "flex-end" }}>
             <img
               src={keyplan && keyplan[0].thumbnails.large.url}
               alt={unit}
@@ -98,7 +107,7 @@ const Unit = ({ data }) => {
           </Grid>
         </Grid>
 
-        <Grid item sm={12} md={6}>
+        <Grid item sm={12} md={5}>
           <Button
             href={Planpdf && Planpdf[0].url}
             color="primary"

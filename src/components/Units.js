@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   const classes = useStyles();
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     const item =
@@ -154,7 +153,9 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                       onClick={handleLocalStorage}
                       component={Link}
                       to={{
-                        pathname: `/unit/${u.fields.unit}`,
+                        pathname: `/unit/${
+                          u.fields.unit
+                        }/${u.fields.building.toLowerCase()}`,
                         state: { level: u.fields.level },
                       }}
                       color="secondary"
