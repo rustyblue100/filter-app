@@ -43,6 +43,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: "#cc8963",
+      dark: "#eee2db",
     },
     third: {
       main: "rgb(247, 241, 240)",

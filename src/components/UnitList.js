@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container_grid: {},
   form_label: {
+    lineHeight: 1.1,
     marginTop: "3px",
     color: theme.palette.background.default,
     textTransform: "uppercase",
@@ -311,7 +312,7 @@ const UnitList = ({ combineUnits }) => {
                 </FormGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6} md={1}>
+            <Grid item xs={12} sm={6} md={2}>
               <Button
                 className={classes.reset}
                 onClick={() => {

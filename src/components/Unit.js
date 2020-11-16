@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import ContactForm from "./ContactForm";
 import { makeStyles } from "@material-ui/core/styles";
-
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import {
   Container,
   Box,
@@ -14,6 +14,7 @@ import {
   Button,
   Divider,
   Grid,
+  Icon,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     maxHeight: "58vh",
     objectFit: "contain",
+    [theme.breakpoints.down("md")]: { maxHeight: "50vh" },
   },
 }));
 
@@ -60,14 +62,14 @@ const Unit = ({ data }) => {
       </Box>
       <Box mt={1} mb={2}>
         <Button
+          startIcon={<ArrowBackIcon />}
           className={classes.back}
-          size="small"
+          size="medium"
           to={{
             pathname: "/",
             state: { level: restoreId },
           }}
           component={Link}
-          variant="outlined"
           color="secondary"
         >
           back
@@ -76,7 +78,7 @@ const Unit = ({ data }) => {
 
       <Grid container spacing={2} mt={2}>
         <Grid item container xs={12} md={6}>
-          <Grid item sm={12} md={8}>
+          <Grid item sm={12} md={7}>
             <Grid component="figure" className={classes.figure}>
               <img
                 className={classes.media}
@@ -87,7 +89,7 @@ const Unit = ({ data }) => {
             </Grid>
           </Grid>
 
-          <Grid item sm={12} md={4} style={{ alignSelf: "end" }}>
+          <Grid item sm={12} md={5} style={{ alignSelf: "end" }}>
             <img
               src={keyplan && keyplan[0].thumbnails.large.url}
               alt={unit}
@@ -105,7 +107,7 @@ const Unit = ({ data }) => {
             Download pdf
           </Button>
 
-          <Box mt={8}>
+          <Box mt={4}>
             <ContactForm />
           </Box>
         </Grid>
