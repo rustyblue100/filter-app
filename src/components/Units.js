@@ -107,15 +107,27 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
   }
 
   function handleLocalStorage() {
-    if (rooms && rooms.length > 0) {
+    if (
+      rooms &&
+      !rooms.includes(sessionStorage.getItem("rooms")) &&
+      rooms.length > 0
+    ) {
       sessionStorage.setItem("rooms", JSON.stringify(rooms));
     }
 
-    if (buildings && buildings.length > 0) {
+    if (
+      buildings &&
+      !buildings.includes(sessionStorage.getItem("buildings")) &&
+      buildings.length > 0
+    ) {
       sessionStorage.setItem("buildings", JSON.stringify(buildings));
     }
 
-    if (sqFt && sqFt.length > 0) {
+    if (
+      sqFt &&
+      !sqFt.includes(sessionStorage.getItem("sqFt")) &&
+      sqFt.length > 0
+    ) {
       sessionStorage.setItem("sqFt", JSON.stringify(sqFt));
     }
   }
