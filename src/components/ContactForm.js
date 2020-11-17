@@ -102,10 +102,14 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.primary,
     textTransform: "uppercase",
     justifyContent: "flex-start",
-    paddingLeft: "16px ",
+    paddingLeft: "23px ",
     fontWeight: 400,
     fontFamily: theme.typography.fontFamily2,
     fontSize: "24px",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
+    },
   },
 }));
 
