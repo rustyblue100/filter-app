@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   contact: {
-    [theme.breakpoints.down("sm")]: { paddingBottom: "12rem" },
+    [theme.breakpoints.down("sm")]: { marginBottom: "12rem" },
   },
 }));
 

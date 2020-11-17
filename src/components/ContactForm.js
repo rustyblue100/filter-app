@@ -110,6 +110,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.secondary.main,
     },
+    [theme.breakpoints.down("sm")]: { marginBottom: "12rem" },
   },
 }));
 
