@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   media: {
     maxWidth: "100%",
     height: "auto",
-    maxHeight: "62vh",
+    maxHeight: "68vh",
     objectFit: "contain",
     [theme.breakpoints.down("sm")]: { paddingBottom: "1rem" },
 
@@ -72,7 +72,7 @@ const Unit = ({ data }) => {
 
   return (
     <motion.div exit={{ opacity: 0 }} initial="initial" animate="animate">
-      <Container className={classes.root}>
+      <Container className={classes.root} style={{ height: "110vh" }}>
         <Box mt={3}>
           <Typography
             variant="h1"
@@ -104,39 +104,42 @@ const Unit = ({ data }) => {
 
         <Grid container spacing={2} mt={2}>
           <Grid item container xs={12} md={7}>
-            {/* <Grid item sm={12} md={12}> */}
-            <Grid component="figure" className={classes.figure}>
-              <motion.img
-                initial={{ x: 20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.6 }}
-                className={classes.media}
-                src={planpng && planpng[0].url}
-                title={unit && `unit ${unit} in building ${building}`}
-                alt={unit && `unit ${unit} in building ${building}`}
-              />
-              {/*   </Grid> */}
+            <Grid item sm={12}>
+              <Grid component="figure" className={classes.figure}>
+                <motion.img
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className={classes.media}
+                  src={planpng && planpng[0].url}
+                  title={unit && `unit ${unit} in building ${building}`}
+                  alt={unit && `unit ${unit} in building ${building}`}
+                />
+              </Grid>
             </Grid>
 
-            {/*             <Grid
+            <Grid
               component="figure"
               item
               sm={12}
-              md={5}
               style={{ alignSelf: "flex-end" }}
             >
-              <motion.img
-                initial={{ x: 20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                src={keyplan && keyplan[0].thumbnails.large.url}
-                width="100"
-                title={
-                  unit && `keyplan of unit ${unit} in building ${building}`
-                }
-                alt={unit && `keyplan of unit ${unit} in building ${building}`}
-              />
-            </Grid> */}
+              <Box pt={4}>
+                <motion.img
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 18, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  src={keyplan && keyplan[0].thumbnails.large.url}
+                  width="100"
+                  title={
+                    unit && `keyplan of unit ${unit} in building ${building}`
+                  }
+                  alt={
+                    unit && `keyplan of unit ${unit} in building ${building}`
+                  }
+                />
+              </Box>
+            </Grid>
           </Grid>
 
           <Grid item sm={12} md={5}>
@@ -165,23 +168,23 @@ const Unit = ({ data }) => {
           </Grid>
         </Grid>
 
-        <Box
-          container
-          justify="flex-start"
-          spacing={2}
-          style={{ marginTop: "40px" }}
-        >
-          <Box item>
-            <motion.img
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 14, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              src={keyplan && keyplan[0].thumbnails.large.url}
-              alt={unit}
-              width="100"
-            />
-          </Box>
+        {/*       <Box
+        container
+        justify="flex-start"
+        spacing={2}
+        style={{ marginTop: "40px" }}
+      >
+        <Box item>
+          <img
+            src={keyplan && keyplan[0].thumbnails.large.url}
+            alt={unit}
+            width="100"
+          />
         </Box>
+        <Box item>
+          <span>{unit}</span> <span>{building}</span>
+        </Box>
+      </Box> */}
       </Container>
     </motion.div>
   );
