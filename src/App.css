@@ -289,7 +289,8 @@ footer nav ul li .active {
 
 .topButton {
   position: fixed !important;
-  bottom: 30px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 30px;
   display: flex;
   flex-direction: column;
@@ -299,6 +300,6 @@ footer nav ul li .active {
 
 @media only screen and (max-width: 900px) {
   .topButton {
-    right: 00px;
+    right: 0px;
   }
 }
