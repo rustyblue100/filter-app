@@ -184,7 +184,12 @@ const UnitList = ({ combineUnits }) => {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <Container maxWidth={false} className={classes.container_filter}>
         <Container>
           <Grid
@@ -351,11 +356,7 @@ const UnitList = ({ combineUnits }) => {
 
       {filteredUnits.length > 0 ? (
         <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-          >
+          <motion.div>
             <Container>
               {/*    <Pagination count={10} color="primary" /> */}
               <Units filteredUnits={filteredUnits} level={1} {...filters} />
@@ -394,7 +395,7 @@ const UnitList = ({ combineUnits }) => {
           </Box>
         </Container>
       )}
-    </>
+    </motion.div>
   );
 };
 
