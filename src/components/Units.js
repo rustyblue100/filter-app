@@ -167,7 +167,7 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
               md={3}
               key={`restore-${u.id}`}
               tabindex="0"
-              style={{ outlineColor: "transparent" }}
+              style={{ outlineColor: "#F7F1F0" }}
             >
               <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
