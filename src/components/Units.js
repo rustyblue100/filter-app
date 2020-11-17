@@ -160,7 +160,15 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
           )
           .sort((a, b) => a.fields.unit - b.fields.unit)
           .map((u, index) => (
-            <Grid item xs={12} sm={6} md={3} key={`restore-${u.id}`}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              key={`restore-${u.id}`}
+              tabindex="0"
+              style={{ outlineColor: "transparent" }}
+            >
               <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>

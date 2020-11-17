@@ -375,6 +375,7 @@ const UnitList = ({ combineUnits }) => {
 
             {top && (
               <Button
+                tabindex="0"
                 className="topButton"
                 id="backtop"
                 arial-label="scroll-top"
