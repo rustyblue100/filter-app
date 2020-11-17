@@ -72,7 +72,7 @@ const Unit = ({ data }) => {
 
   return (
     <motion.div exit={{ opacity: 0 }} initial="initial" animate="animate">
-      <Container className={classes.root} style={{ height: "110vh" }}>
+      <Container className={classes.root} style={{ height: "130vh" }}>
         <Box mt={3}>
           <Typography
             variant="h1"
@@ -127,7 +127,7 @@ const Unit = ({ data }) => {
               <Box pt={4}>
                 <motion.img
                   initial={{ x: -10, opacity: 0 }}
-                  animate={{ x: 18, opacity: 1 }}
+                  animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                   src={keyplan && keyplan[0].thumbnails.large.url}
                   width="100"
