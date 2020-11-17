@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   media: {
     maxWidth: "100%",
     height: "auto",
-    maxHeight: "58vh",
+    maxHeight: "62vh",
     objectFit: "contain",
     [theme.breakpoints.down("sm")]: { paddingBottom: "1rem" },
 
@@ -104,21 +104,21 @@ const Unit = ({ data }) => {
 
         <Grid container spacing={2} mt={2}>
           <Grid item container xs={12} md={7}>
-            <Grid item sm={12} md={7}>
-              <Grid component="figure" className={classes.figure}>
-                <motion.img
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className={classes.media}
-                  src={planpng && planpng[0].url}
-                  title={unit && `unit ${unit} in building ${building}`}
-                  alt={unit && `unit ${unit} in building ${building}`}
-                />
-              </Grid>
+            {/* <Grid item sm={12} md={12}> */}
+            <Grid component="figure" className={classes.figure}>
+              <motion.img
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.6 }}
+                className={classes.media}
+                src={planpng && planpng[0].url}
+                title={unit && `unit ${unit} in building ${building}`}
+                alt={unit && `unit ${unit} in building ${building}`}
+              />
+              {/*   </Grid> */}
             </Grid>
 
-            <Grid
+            {/*             <Grid
               component="figure"
               item
               sm={12}
@@ -136,7 +136,7 @@ const Unit = ({ data }) => {
                 }
                 alt={unit && `keyplan of unit ${unit} in building ${building}`}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
 
           <Grid item sm={12} md={5}>
@@ -165,23 +165,23 @@ const Unit = ({ data }) => {
           </Grid>
         </Grid>
 
-        {/*       <Box
-        container
-        justify="flex-start"
-        spacing={2}
-        style={{ marginTop: "40px" }}
-      >
-        <Box item>
-          <img
-            src={keyplan && keyplan[0].thumbnails.large.url}
-            alt={unit}
-            width="100"
-          />
+        <Box
+          container
+          justify="flex-start"
+          spacing={2}
+          style={{ marginTop: "40px" }}
+        >
+          <Box item>
+            <motion.img
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 14, opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              src={keyplan && keyplan[0].thumbnails.large.url}
+              alt={unit}
+              width="100"
+            />
+          </Box>
         </Box>
-        <Box item>
-          <span>{unit}</span> <span>{building}</span>
-        </Box>
-      </Box> */}
       </Container>
     </motion.div>
   );
