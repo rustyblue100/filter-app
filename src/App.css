@@ -286,3 +286,19 @@ footer nav ul li a:hover {
 footer nav ul li .active {
   color: var(--primary);
 }
+
+.topButton {
+  position: fixed !important;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .topButton {
+    right: 00px;
+  }
+}

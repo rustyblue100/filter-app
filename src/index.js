@@ -56,8 +56,10 @@ const theme = createMuiTheme({
   typography: {
     h1: { fontFamily: "'Unna', sans-serif", fontSize: "40px" },
     h2: { fontFamily: "'Montserrat', sans-serif", fontSize: "40px" },
+
     body1: { lineHeight: "1.5" },
     fontFamily: "'Montserrat', sans-serif",
+    fontFamily2: "'Unna', sans-serif",
     body2: { family: "'Unna', sans-serif" },
   },
   shape: { borderRadius: 0 },

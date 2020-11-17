@@ -91,6 +91,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "40px",
     textTransform: "uppercase",
     padding: "11px 23px",
+    fontWeight: 400,
+    fontFamily: theme.typography.fontFamily2,
+    fontSize: "24px",
   },
 
   submit: {
@@ -98,6 +101,11 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `1px solid ${theme.palette.secondary.main}`,
     color: theme.palette.secondary.primary,
     textTransform: "uppercase",
+    justifyContent: "flex-start",
+    paddingLeft: "16px ",
+    fontWeight: 400,
+    fontFamily: theme.typography.fontFamily2,
+    fontSize: "24px",
   },
 }));
 

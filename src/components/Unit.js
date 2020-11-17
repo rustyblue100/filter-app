@@ -37,7 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down("md")]: { maxHeight: "50vh" },
   },
-
+  pdf_button: {
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
   contact: {
     [theme.breakpoints.down("sm")]: { paddingBottom: "12rem" },
   },
@@ -108,8 +112,8 @@ const Unit = ({ data }) => {
                   transition={{ duration: 0.6 }}
                   className={classes.media}
                   src={planpng && planpng[0].url}
-                  title={`unit ${unit} in building ${building}`}
-                  alt={`unit ${unit} in building ${building}`}
+                  title={unit && `unit ${unit} in building ${building}`}
+                  alt={unit && `unit ${unit} in building ${building}`}
                 />
               </Grid>
             </Grid>
@@ -127,8 +131,10 @@ const Unit = ({ data }) => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 src={keyplan && keyplan[0].thumbnails.large.url}
                 width="100"
-                title={`keyplan of unit ${unit} in building ${building}`}
-                alt={`keyplan of unit ${unit} in building ${building}`}
+                title={
+                  unit && `keyplan of unit ${unit} in building ${building}`
+                }
+                alt={unit && `keyplan of unit ${unit} in building ${building}`}
               />
             </Grid>
           </Grid>
@@ -141,6 +147,7 @@ const Unit = ({ data }) => {
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
                 <Button
+                  className={classes.pdf_button}
                   target="_blank"
                   rel="noopener"
                   href={Planpdf && Planpdf[0].url}

@@ -107,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UnitList = ({ combineUnits }) => {
+  const [top, setTop] = useState(false);
   const classes = useStyles();
 
   const [rooms, setRooms] = useState(
@@ -158,10 +159,27 @@ const UnitList = ({ combineUnits }) => {
         })
       : combineUnits;
 
+  useEffect(() => {
+    window.onscroll = function () {
+      if (
+        document.body.scrollTop > 1000 ||
+        document.documentElement.scrollTop > 1000
+      ) {
+        setTop(true);
+      } else {
+        setTop(false);
+      }
+    };
+  }, []);
+
   const filters = {
     rooms,
     buildings,
     sqFt,
+  };
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -333,8 +351,8 @@ const UnitList = ({ combineUnits }) => {
       {filteredUnits.length > 0 ? (
         <>
           <motion.div
-            initial={{ y: 0, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
             <Container>
@@ -354,6 +372,17 @@ const UnitList = ({ combineUnits }) => {
               <Units filteredUnits={filteredUnits} level={13} {...filters} />
               <Units filteredUnits={filteredUnits} level={14} {...filters} />
             </Container>
+
+            {top && (
+              <Button
+                className="topButton"
+                id="backtop"
+                arial-label="scroll-top"
+                onClick={() => scrollTop()}
+              >
+                <ArrowUpwardIcon fontSize="large" />
+              </Button>
+            )}
           </motion.div>
         </>
       ) : (

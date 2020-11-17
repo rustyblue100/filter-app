@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
   more: {
     color: theme.palette.background.default,
 
-    /*     "&:hover": {
+    "&:hover": {
       backgroundColor: theme.palette.primary.main,
-    }, */
+    },
   },
 
   card: {
