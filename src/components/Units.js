@@ -207,16 +207,18 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                     </Button>
                   </CardActions>
 
-                  <CardMedia
-                    className={`${classes.media}`}
-                    image={
-                      u.fields.planpng &&
-                      u.fields.planpng[0].thumbnails.large.url
-                    }
-                    component={"img"}
-                    alt={`plan of ${u.fields.unit} unit`}
-                    title={`plan of ${u.fields.unit} unit`}
-                  />
+                  <motion.figure layout style={{ margin: 0 }}>
+                    <CardMedia
+                      className={`${classes.media}`}
+                      image={
+                        u.fields.planpng &&
+                        u.fields.planpng[0].thumbnails.large.url
+                      }
+                      component={"img"}
+                      alt={`plan of ${u.fields.unit} unit`}
+                      title={`plan of ${u.fields.unit} unit`}
+                    />
+                  </motion.figure>
                 </Card>
               </LazyLoad>
             </Grid>

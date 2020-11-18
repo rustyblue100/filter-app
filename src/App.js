@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Unit from "./components/Unit";
 import UnitList from "./components/UnitList";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 const BASE = process.env.REACT_APP_AT_API_BASE;
 const TABLE = process.env.REACT_APP_AT_TABLE_NAME;
@@ -148,27 +148,29 @@ const App = () => {
 
   return (
     <>
-      <AnimatePresence exitBeforeEnter>
-        {/*    <Header /> */}
+      <AnimateSharedLayout type="crossfade">
+        <AnimatePresence exitBeforeEnter>
+          {/*    <Header /> */}
 
-        <Router>
-          <div className="App"></div>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => <UnitList combineUnits={combineUnits} />}
-            />
+          <Router>
+            <div className="App"></div>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => <UnitList combineUnits={combineUnits} />}
+              />
 
-            <Route
-              exact
-              path="/unit/:unitNumber/:buildingId"
-              render={() => <Unit data={combineUnits} />}
-            />
-          </Switch>
-        </Router>
-        {/*     <Footer /> */}
-      </AnimatePresence>
+              <Route
+                exact
+                path="/unit/:unitNumber/:buildingId"
+                render={() => <Unit data={combineUnits} />}
+              />
+            </Switch>
+          </Router>
+          {/*     <Footer /> */}
+        </AnimatePresence>
+      </AnimateSharedLayout>
     </>
   );
 };
