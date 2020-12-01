@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   media: {
+    maxWidth: "100%",
     height: "auto",
     maxHeight: "68vh",
     objectFit: "contain",
@@ -104,9 +105,9 @@ const Unit = ({ data }) => {
           </Button>
         </Box>
 
-        <Grid container spacing={2} mt={2} justify="center">
-          <Grid item container xs={12} md={7}>
-            <Grid item sm={12} justifySelf="flex-end">
+        <Grid container mt={2} justify="space-around">
+          <Grid item flex="2">
+            <Grid item>
               <Grid component="figure" className={classes.figure}>
                 <motion.img
                   initial={{ x: 20, opacity: 0 }}
@@ -119,13 +120,7 @@ const Unit = ({ data }) => {
                 />
               </Grid>
             </Grid>
-
-            <Grid
-              component="figure"
-              item
-              sm={12}
-              style={{ alignSelf: "flex-end" }}
-            >
+            <Grid component="figure" item>
               <Box pt={4}>
                 <motion.img
                   initial={{ x: -10, opacity: 0 }}
@@ -141,10 +136,11 @@ const Unit = ({ data }) => {
                   }
                 />
               </Box>
-            </Grid>
+            </Grid>{" "}
+            *
           </Grid>
 
-          <Grid item sm={12} md={5}>
+          <Grid item flex="1">
             <Box>
               <motion.div
                 initial={{ y: 0, opacity: 0 }}

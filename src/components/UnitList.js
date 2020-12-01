@@ -100,10 +100,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: { paddingTop: "24px" },
   },
   reset: {
-    /*    textTransform: "lowercase", */
+    fontFamily: theme.typography.fontFamily,
+    textTransform: "uppercase",
     color: theme.palette.background.default,
-    fontSize: "12px",
-    marginTop: "-7px",
+    fontSize: "16px",
+    fontWeight: "700",
+
     [theme.breakpoints.down("sm")]: { paddingTop: "24px" },
   },
   page_title: {
@@ -141,7 +143,7 @@ const UnitList = ({ combineUnits }) => {
   const SquareFeets = [
     { sqFtLabel: "600" },
     { sqFtLabel: "600-799" },
-    { sqFtLabel: "800-999" },
+    { sqFtLabel: "800-1000" },
     { sqFtLabel: "1000" },
   ];
 
@@ -159,7 +161,7 @@ const UnitList = ({ combineUnits }) => {
               sqFtMod = "600-799";
               break;
             case area >= 800 && area <= 999:
-              sqFtMod = "800-999";
+              sqFtMod = "800-1000";
               break;
             case area >= 1000:
               sqFtMod = "1000";
@@ -203,7 +205,7 @@ const UnitList = ({ combineUnits }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0.8 }}
+      initial={{ opacity: 0.7 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
@@ -308,7 +310,7 @@ const UnitList = ({ combineUnits }) => {
                             name={d.denLabel}
                           />
                         }
-                        label={d.denLabel && "+ den"}
+                        label={d.denLabel && "+ DEN"}
                         value={d.denLabel}
                         checked={dens && dens.includes(d.denLabel) && true}
                       />
