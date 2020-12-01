@@ -119,7 +119,7 @@ const MaterialUiForm = () => {
   return (
     <div>
       <h3 className={classes.header_form}>Find out more</h3>
-      <Box mt={-2}>
+      <Box mt={-3}>
         <form
           autoComplete="on"
           action="https://formsubmit.io/send/818dba04-fccd-44f4-a99c-50326fb1d489"

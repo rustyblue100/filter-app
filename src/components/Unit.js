@@ -27,18 +27,20 @@ const useStyles = makeStyles((theme) => ({
   },
   back: {},
   figure: {
-    padding: 0,
+    padding: "0 80px",
+    [theme.breakpoints.down("sm")]: { padding: "0" },
     margin: 0,
     backgroundColor: theme.palette.background.default,
   },
   media: {
     maxWidth: "100%",
     height: "auto",
-    maxHeight: "68vh",
+
+    paddingRight: "2rem",
     objectFit: "contain",
     [theme.breakpoints.down("sm")]: { paddingBottom: "1rem" },
 
-    [theme.breakpoints.down("md")]: { maxHeight: "50vh" },
+    /*   [theme.breakpoints.down("md")]: { maxHeight: "50vh" }, */
   },
   pdf_button: {
     "&:hover": {
@@ -47,6 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
   contact: {
     [theme.breakpoints.down("sm")]: { marginBottom: "12rem" },
+  },
+
+  keyplan_mobile: {
+    [theme.breakpoints.up("md")]: { display: "none" },
+  },
+  keyplan: {
+    [theme.breakpoints.down("sm")]: { display: "none" },
   },
 }));
 
@@ -79,9 +88,16 @@ const Unit = ({ data }) => {
         <Box mt={3}>
           <Typography
             variant="h1"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
-            Unit {unit} {building}
+            Unit {unit}
+            <span style={{ paddingLeft: "1rem", fontSize: "1.2rem" }}>
+              ({building === "A" ? "123 Bronte Rd" : "133 Bronte Rd"})
+            </span>
           </Typography>
         </Box>
         <Box mt={1} mb={2}>
@@ -105,9 +121,9 @@ const Unit = ({ data }) => {
           </Button>
         </Box>
 
-        <Grid container mt={2} justify="space-around">
-          <Grid item flex="2">
-            <Grid item>
+        <Grid container mt={2}>
+          <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
               <Grid component="figure" className={classes.figure}>
                 <motion.img
                   initial={{ x: 20, opacity: 0 }}
@@ -120,8 +136,8 @@ const Unit = ({ data }) => {
                 />
               </Grid>
             </Grid>
-            <Grid component="figure" item>
-              <Box pt={4}>
+            <Grid component="figure" item className={classes.keyplan_mobile}>
+              <Box py={5}>
                 <motion.img
                   initial={{ x: -10, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -136,11 +152,11 @@ const Unit = ({ data }) => {
                   }
                 />
               </Box>
-            </Grid>{" "}
+            </Grid>
             *
           </Grid>
 
-          <Grid item flex="1">
+          <Grid item md={6}>
             <Box>
               <motion.div
                 initial={{ y: 0, opacity: 0 }}
@@ -158,9 +174,24 @@ const Unit = ({ data }) => {
                   Download pdf
                 </Button>
 
-                <motion.Box mt={4} className={classes.contact}>
+                <motion.Box mt={0} className={classes.contact}>
                   <ContactForm />
                 </motion.Box>
+                <Box pt={4} className={classes.keyplan}>
+                  <motion.img
+                    initial={{ x: -10, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    src={keyplan && keyplan[0].thumbnails.large.url}
+                    width="160"
+                    title={
+                      unit && `keyplan of unit ${unit} in building ${building}`
+                    }
+                    alt={
+                      unit && `keyplan of unit ${unit} in building ${building}`
+                    }
+                  />
+                </Box>
               </motion.div>
             </Box>
           </Grid>
