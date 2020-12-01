@@ -177,7 +177,7 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
               tabindex="0"
               style={{ outlineColor: "#F7F1F0" }}
             >
-              <LazyLoad height={400} once={true} offset={3000}>
+              <LazyLoad height={400} once={true} offset={100}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography variant="body1">
@@ -192,7 +192,8 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
                     <Typography variant="body1">
                       BEDROOM:{" "}
                       <strong>
-                        {u.fields.room} {u.fields.den > 0 && "+ den"}
+                        {u.fields.room === undefined ? "1" : u.fields.room}{" "}
+                        {u.fields.den > 0 && "+ den"}
                       </strong>
                     </Typography>
                     <Typography variant="body1">

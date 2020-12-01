@@ -21,7 +21,9 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: "0 14px",
+    [theme.breakpoints.up("lg")]: { padding: "0 14px" },
+    [theme.breakpoints.down("lg")]: { padding: "0 28px" },
+    [theme.breakpoints.down("md")]: { padding: "0 40px" },
   },
   back: {},
   figure: {

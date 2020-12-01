@@ -90,6 +90,9 @@ const useStyles = makeStyles((theme) => ({
   form_labelDen: {
     paddingLeft: "10px",
     paddingTop: "10px",
+    [theme.breakpoints.down("lg")]: { marginLeft: "-60px" },
+    [theme.breakpoints.down("md")]: { marginLeft: "-20px" },
+    height: "1px",
   },
   control: {
     flexDirection: "row",
@@ -136,7 +139,8 @@ const UnitList = ({ combineUnits }) => {
   const denDen = [{ denLabel: "1" }];
   const edifice = [{ buildingLabel: "A" }, { buildingLabel: "B" }];
   const SquareFeets = [
-    { sqFtLabel: "400-799" },
+    { sqFtLabel: "600" },
+    { sqFtLabel: "600-799" },
     { sqFtLabel: "800-999" },
     { sqFtLabel: "1000" },
   ];
@@ -148,8 +152,11 @@ const UnitList = ({ combineUnits }) => {
 
           let sqFtMod = "";
           switch (true) {
-            case area >= 400 && area <= 799:
-              sqFtMod = "400-799";
+            case area < 600:
+              sqFtMod = "600";
+              break;
+            case area >= 600 && area <= 799:
+              sqFtMod = "600-799";
               break;
             case area >= 800 && area <= 999:
               sqFtMod = "800-999";
@@ -220,7 +227,7 @@ const UnitList = ({ combineUnits }) => {
               </Typography>
             </Grid>
 
-            <Grid item sm={6} md={1}>
+            <Grid item sm={6} md={2} lg={1}>
               <FormControl className={classes.control}>
                 <FormLabel
                   component="legend"
@@ -341,7 +348,13 @@ const UnitList = ({ combineUnits }) => {
                           name={s.sqFtLabel}
                         />
                       }
-                      label={s.sqFtLabel}
+                      label={
+                        s.sqFtLabel === "600"
+                          ? "< 600"
+                          : s.sqFtLabel === "1000"
+                          ? "> 1000"
+                          : s.sqFtLabel
+                      }
                       value={s.sqFtLabel}
                       checked={sqFt && sqFt.includes(s.sqFtLabel) && true}
                     />
@@ -415,20 +428,17 @@ const UnitList = ({ combineUnits }) => {
           <motion.div>
             <Container>
               {/*    <Pagination count={10} color="primary" /> */}
-              <Units filteredUnits={filteredUnits} level={1} {...filters} />
-              <Units filteredUnits={filteredUnits} level={2} {...filters} />
-              <Units filteredUnits={filteredUnits} level={3} {...filters} />
-              <Units filteredUnits={filteredUnits} level={4} {...filters} />
-              <Units filteredUnits={filteredUnits} level={5} {...filters} />
-              <Units filteredUnits={filteredUnits} level={6} {...filters} />
-              <Units filteredUnits={filteredUnits} level={7} {...filters} />
-              <Units filteredUnits={filteredUnits} level={8} {...filters} />
-              <Units filteredUnits={filteredUnits} level={9} {...filters} />
-              <Units filteredUnits={filteredUnits} level={10} {...filters} />
-              <Units filteredUnits={filteredUnits} level={11} {...filters} />
-              <Units filteredUnits={filteredUnits} level={12} {...filters} />
-              <Units filteredUnits={filteredUnits} level={13} {...filters} />
-              <Units filteredUnits={filteredUnits} level={14} {...filters} />
+
+              {Array.apply(null, { length: 15 }).map((i, el) => {
+                return (
+                  <Units
+                    key={el}
+                    filteredUnits={filteredUnits}
+                    level={el}
+                    {...filters}
+                  />
+                );
+              })}
             </Container>
 
             {top && (
