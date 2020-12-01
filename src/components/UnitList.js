@@ -87,6 +87,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     [theme.breakpoints.down("xs")]: { fontSize: "14px" },
   },
+  form_labelDen: {
+    paddingLeft: "10px",
+    paddingTop: "10px",
+  },
   control: {
     flexDirection: "row",
     color: theme.palette.background.default,
@@ -115,6 +119,10 @@ const UnitList = ({ combineUnits }) => {
     sessionStorage.getItem("rooms") ? sessionStorage.getItem("rooms") : []
   );
 
+  const [dens, setDens] = useState(
+    sessionStorage.getItem("dens") ? sessionStorage.getItem("dens") : []
+  );
+
   const [buildings, setBuilding] = useState(
     sessionStorage.getItem("buildings")
       ? sessionStorage.getItem("buildings")
@@ -125,6 +133,7 @@ const UnitList = ({ combineUnits }) => {
   );
 
   const bedRooms = [{ roomsLabel: "1" }, { roomsLabel: "2" }];
+  const denDen = [{ denLabel: "1" }];
   const edifice = [{ buildingLabel: "A" }, { buildingLabel: "B" }];
   const SquareFeets = [
     { sqFtLabel: "400-799" },
@@ -135,7 +144,7 @@ const UnitList = ({ combineUnits }) => {
   const filteredUnits =
     rooms.length || buildings.length || sqFt.length
       ? combineUnits.filter((apartment) => {
-          const { room, building, area } = apartment.fields;
+          const { room = "1", den, building, area } = apartment.fields;
 
           let sqFtMod = "";
           switch (true) {
@@ -154,6 +163,7 @@ const UnitList = ({ combineUnits }) => {
 
           return (
             (!rooms.length || rooms.includes(room)) &&
+            (!dens.length || dens.includes(den)) &&
             (!buildings.length || buildings.includes(building)) &&
             (!sqFt || !sqFt.length || sqFt.includes(sqFtMod))
           );
@@ -175,6 +185,7 @@ const UnitList = ({ combineUnits }) => {
 
   const filters = {
     rooms,
+    dens,
     buildings,
     sqFt,
   };
@@ -209,7 +220,7 @@ const UnitList = ({ combineUnits }) => {
               </Typography>
             </Grid>
 
-            <Grid item sm={6} md={2}>
+            <Grid item sm={6} md={1}>
               <FormControl className={classes.control}>
                 <FormLabel
                   component="legend"
@@ -249,6 +260,50 @@ const UnitList = ({ combineUnits }) => {
                         label={a.roomsLabel + " BEDROOM"}
                         value={a.roomsLabel}
                         checked={rooms && rooms.includes(a.roomsLabel) && true}
+                      />
+                    );
+                  })}
+                </FormGroup>
+              </FormControl>
+            </Grid>
+
+            <Grid item sm={2} md={1}>
+              <FormControl className={classes.control}>
+                <FormLabel
+                  component="legend"
+                  className={classes.form_label}
+                  focused={false}
+                ></FormLabel>
+                <FormGroup className={classes.form_labelDen}>
+                  {denDen.map((d, i) => {
+                    return (
+                      <FormControlLabel
+                        key={i}
+                        control={
+                          <Checkbox
+                            disableRipple={true}
+                            classes={{
+                              root: classes.root,
+                              checked: classes.checked,
+                            }}
+                            icon={<span className={classes.icon} />}
+                            checkedIcon={
+                              <span className={classes.checkedIcon} />
+                            }
+                            onChange={(event) => {
+                              sessionStorage.clear();
+                              setDens((prev) =>
+                                event.target.checked
+                                  ? [...prev, d.denLabel]
+                                  : []
+                              );
+                            }}
+                            name={d.denLabel}
+                          />
+                        }
+                        label={d.denLabel && "+ den"}
+                        value={d.denLabel}
+                        checked={dens && dens.includes(d.denLabel) && true}
                       />
                     );
                   })}
@@ -342,6 +397,7 @@ const UnitList = ({ combineUnits }) => {
                 className={classes.reset}
                 onClick={() => {
                   setRooms([]);
+                  setDens([]);
                   setBuilding([]);
                   setSqFt([]);
                   sessionStorage.clear();

@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
+const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
   const classes = useStyles();
   const location = useLocation();
 
@@ -113,6 +113,14 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
       rooms.length > 0
     ) {
       sessionStorage.setItem("rooms", JSON.stringify(rooms));
+    }
+
+    if (
+      dens &&
+      !dens.includes(sessionStorage.getItem("dens")) &&
+      dens.length > 0
+    ) {
+      sessionStorage.setItem("dens", JSON.stringify(dens));
     }
 
     if (
@@ -182,7 +190,10 @@ const Units = ({ filteredUnits, level, rooms, buildings, sqFt }) => {
                       SIZE: <strong>{u.fields.area}</strong>
                     </Typography>
                     <Typography variant="body1">
-                      BEDROOM:<strong> {u.fields.room}</strong>
+                      BEDROOM:{" "}
+                      <strong>
+                        {u.fields.room} {u.fields.den > 0 && "+ den"}
+                      </strong>
                     </Typography>
                     <Typography variant="body1">
                       FLOOR: <strong>{u.fields.level}</strong>
