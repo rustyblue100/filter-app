@@ -142,7 +142,7 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
 
   return (
     <motion.div
-      style={{ paddingTop: "40px" }}
+      style={{ paddingTop: String(level) === 1 ? "40px" : "20px" }}
       exit={{ opacity: 0 }}
       initial="initial"
       animate="animate"
@@ -174,14 +174,19 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
               sm={6}
               md={3}
               key={`restore-${u.id}`}
-              tabindex="0"
+              tabIndex="0"
               style={{ outlineColor: "#F7F1F0" }}
             >
-              <LazyLoad height={400} once={true} offset={100}>
+              <LazyLoad height={400} once={true} offset={800}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography variant="body1">
-                      BUILDING: <strong>{u.fields.building}</strong>
+                      BUILDING:{" "}
+                      <strong>
+                        {u.fields.building === "A"
+                          ? "123 Bronte"
+                          : "133 Bronte"}
+                      </strong>
                     </Typography>
                     <Typography variant="body1">
                       UNIT: <strong>{u.fields.unit}</strong>

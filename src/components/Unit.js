@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   media: {
-    maxWidth: "100%",
     height: "auto",
     maxHeight: "68vh",
     objectFit: "contain",
@@ -105,14 +104,14 @@ const Unit = ({ data }) => {
           </Button>
         </Box>
 
-        <Grid container spacing={2} mt={2}>
+        <Grid container spacing={2} mt={2} justify="center">
           <Grid item container xs={12} md={7}>
-            <Grid item sm={12}>
+            <Grid item sm={12} justifySelf="flex-end">
               <Grid component="figure" className={classes.figure}>
                 <motion.img
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.8 }}
                   className={classes.media}
                   src={planpng && planpng[0].url}
                   title={unit && `unit ${unit} in building ${building}`}
@@ -131,7 +130,7 @@ const Unit = ({ data }) => {
                 <motion.img
                   initial={{ x: -10, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
                   src={keyplan && keyplan[0].thumbnails.large.url}
                   width="100"
                   title={

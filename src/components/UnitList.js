@@ -203,7 +203,7 @@ const UnitList = ({ combineUnits }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 0.8 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
@@ -395,7 +395,9 @@ const UnitList = ({ combineUnits }) => {
                           name={e.buildingLabel}
                         />
                       }
-                      label={e.buildingLabel}
+                      label={
+                        e.buildingLabel === "A" ? "123 Bronte" : "133 Bronte"
+                      }
                       value={e.buildingLabel}
                       checked={
                         buildings && buildings.includes(e.buildingLabel) && true
