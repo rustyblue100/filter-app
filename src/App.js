@@ -151,7 +151,7 @@ const App = () => {
     <>
       <AnimateSharedLayout type="crossfade">
         <AnimatePresence exitBeforeEnter>
-          {/*    <Header /> */}
+          <Header />
 
           <Router>
             <div className="App"></div>
@@ -170,7 +170,7 @@ const App = () => {
               <Route component={NotFoundPage} />
             </Switch>
           </Router>
-          {/*     <Footer /> */}
+          <Footer />
         </AnimatePresence>
       </AnimateSharedLayout>
     </>
