@@ -90,8 +90,8 @@ const useStyles = makeStyles((theme) => ({
   form_labelDen: {
     paddingLeft: "10px",
     paddingTop: "10px",
-    [theme.breakpoints.down("lg")]: { marginLeft: "-60px" },
-    [theme.breakpoints.down("md")]: { marginLeft: "-20px" },
+    /*   [theme.breakpoints.down("lg")]: { marginLeft: "-60px" },
+    [theme.breakpoints.down("md")]: { marginLeft: "-20px" }, */
     height: "1px",
   },
   control: {
