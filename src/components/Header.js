@@ -41,19 +41,17 @@ const Header = () => {
                 <a href="#">Home</a>
               </li>
               <li>
-                <a href="https://brontevillageapartments.com/lifestyle">
+                <a href="https://www.thevillageatbronte.com/lifestyle">
                   Lifestyle
                 </a>
               </li>
               <li>
-                <a href="https://brontevillageapartments.com/amenities">
+                <a href="https://www.thevillageatbronte.com/amenities">
                   Amenities
                 </a>
               </li>
               <li>
-                <a href="https://brontevillageapartments.com/gallery">
-                  Gallery
-                </a>
+                <a href="https://www.thevillageatbronte.com/gallery">Gallery</a>
               </li>
               <li>
                 <a className="active" href="#">
@@ -61,10 +59,10 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="https://brontevillageapartments.com/team">Team</a>
+                <a href="https://www.thevillageatbronte.com/team">Team</a>
               </li>
               <li>
-                <a href="https://brontevillageapartments.com/register">
+                <a href="https://www.thevillageatbronte.com/register">
                   Register
                 </a>
               </li>
