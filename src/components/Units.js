@@ -15,7 +15,11 @@ import {
   Paper,
   CardActions,
   Box,
+  CircularProgress,
+  LinearProgress,
 } from "@material-ui/core";
+
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const easing = [0.6, -0.05, 0.01, 0.99];
 
@@ -177,7 +181,21 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
               tabIndex="0"
               style={{ outlineColor: "#F7F1F0" }}
             >
-              <LazyLoad height={400} once={true} offset={800}>
+              <LazyLoad
+                height={400}
+                once={true}
+                offset={800}
+                placeholder={
+                  <div
+                    style={{
+                      width: "100%",
+                    }}
+                  >
+                    Scroll down <br></br>
+                    <KeyboardArrowDownIcon />
+                  </div>
+                }
+              >
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
                     <Typography variant="body1">
