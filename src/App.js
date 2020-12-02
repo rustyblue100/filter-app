@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Unit from "./components/Unit";
 import UnitList from "./components/UnitList";
 import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import NotFoundPage from "./NotFoundPage";
 
 const BASE = process.env.REACT_APP_AT_API_BASE;
 const TABLE = process.env.REACT_APP_AT_TABLE_NAME;
@@ -166,6 +167,7 @@ const App = () => {
                 path="/unit/:unitNumber/:buildingId"
                 render={() => <Unit data={combineUnits} />}
               />
+              <Route component={NotFoundPage} />
             </Switch>
           </Router>
           {/*     <Footer /> */}
