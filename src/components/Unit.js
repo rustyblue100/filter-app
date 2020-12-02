@@ -196,24 +196,6 @@ const Unit = ({ data }) => {
             </Box>
           </Grid>
         </Grid>
-
-        {/*       <Box
-        container
-        justify="flex-start"
-        spacing={2}
-        style={{ marginTop: "40px" }}
-      >
-        <Box item>
-          <img
-            src={keyplan && keyplan[0].thumbnails.large.url}
-            alt={unit}
-            width="100"
-          />
-        </Box>
-        <Box item>
-          <span>{unit}</span> <span>{building}</span>
-        </Box>
-      </Box> */}
       </Container>
     </motion.div>
   );
