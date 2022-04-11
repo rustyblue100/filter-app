@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { Button } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import { Box, Button } from "@material-ui/core";
+import { useEffect } from "react";
 
 const Footer = () => {
   useEffect(() => {
@@ -32,10 +32,10 @@ const Footer = () => {
         <div className="row">
           <ul>
             <li>
-              <a href="#">THE VILLAGE - 125 AND 133 BRONTE RD, OAKVILLE</a>
+              <a href="#"></a>
             </li>
             <li>
-              <a href="http://crombiereit.com/disclaimer">Legal</a>
+              <a href="#">Legal</a>
             </li>
           </ul>
         </div>

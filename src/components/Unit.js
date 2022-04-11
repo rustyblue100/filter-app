@@ -1,22 +1,10 @@
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
-
-import { Link, useParams, useLocation } from "react-router-dom";
-import ContactForm from "./ContactForm";
+import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import {
-  Container,
-  Box,
-  Card,
-  CardMedia,
-  Typography,
-  Input,
-  Button,
-  Divider,
-  Grid,
-  Icon,
-} from "@material-ui/core";
+import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import ContactForm from "./ContactForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,7 +66,7 @@ const Unit = ({ data }) => {
       unit.fields.building.toLowerCase() === buildingId
   );
 
-  const { unit, area, building, planpng, keyplan, Planpdf } = unitData[0]
+  const { unit, building, planpng, keyplan, Planpdf } = unitData[0]
     ? unitData[0].fields
     : "";
 
@@ -96,7 +84,7 @@ const Unit = ({ data }) => {
           >
             Unit {unit}
             <span style={{ paddingLeft: "1rem", fontSize: "1.2rem" }}>
-              ({building === "A" ? "123 Bronte Rd" : "133 Bronte Rd"})
+              ({building === "A" ? "123 Street Rd" : "133 Street Rd"})
             </span>
           </Typography>
         </Box>
@@ -177,21 +165,6 @@ const Unit = ({ data }) => {
                 <motion.Box mt={0} className={classes.contact}>
                   <ContactForm />
                 </motion.Box>
-                <Box pt={4} className={classes.keyplan}>
-                  <motion.img
-                    initial={{ x: -10, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    src={keyplan && keyplan[0].thumbnails.large.url}
-                    width="160"
-                    title={
-                      unit && `keyplan of unit ${unit} in building ${building}`
-                    }
-                    alt={
-                      unit && `keyplan of unit ${unit} in building ${building}`
-                    }
-                  />
-                </Box>
               </motion.div>
             </Box>
           </Grid>

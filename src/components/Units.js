@@ -1,37 +1,17 @@
-import { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import LazyLoad from "react-lazyload";
-import { Link, useParams, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-
 import {
-  Container,
-  Grid,
+  Box,
+  Button,
   Card,
+  CardActions,
   CardContent,
   CardMedia,
+  Grid,
   Typography,
-  Button,
-  Paper,
-  CardActions,
-  Box,
-  CircularProgress,
-  LinearProgress,
 } from "@material-ui/core";
-
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-
-const easing = [0.6, -0.05, 0.01, 0.99];
-
-const fadeInUp = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: { duration: 0.6, ease: easing },
-  },
-};
+import { makeStyles } from "@material-ui/core/styles";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,9 +49,7 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: "border-box",
   },
   floor: {},
-  control: {
-    /*     padding: theme.spacing(2), */
-  },
+  control: {},
 }));
 
 const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
@@ -151,7 +129,10 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
       initial="initial"
       animate="animate"
     >
-      {filteredUnits.some((unit) => unit.fields.level === String(level)) && (
+      {filteredUnits.some(
+        (unit) =>
+          unit && unit.fields.level > 0 && unit.fields.level === String(level)
+      ) && (
         <Box
           component="div"
           className={classes.floor}
@@ -181,7 +162,7 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
               tabIndex="0"
               style={{ outlineColor: "#F7F1F0" }}
             >
-              <LazyLoad
+              {/*               <LazyLoad
                 height={400}
                 once={true}
                 offset={800}
@@ -195,67 +176,65 @@ const Units = ({ filteredUnits, level, rooms, dens, buildings, sqFt }) => {
                     <KeyboardArrowDownIcon />
                   </div>
                 }
-              >
-                <Card className={classes.card}>
-                  <CardContent className={classes.cardContent}>
-                    <Typography variant="body1">
-                      BUILDING:{" "}
-                      <strong>
-                        {u.fields.building === "A"
-                          ? "123 Bronte"
-                          : "133 Bronte"}
-                      </strong>
-                    </Typography>
-                    <Typography variant="body1">
-                      UNIT: <strong>{u.fields.unit}</strong>
-                    </Typography>
-                    <Typography variant="body1">
-                      SIZE: <strong>{u.fields.area}</strong>
-                    </Typography>
-                    <Typography variant="body1">
-                      BEDROOM:{" "}
-                      <strong>
-                        {u.fields.room === undefined ? "1" : u.fields.room}{" "}
-                        {u.fields.den > 0 && "+ den"}
-                      </strong>
-                    </Typography>
-                    <Typography variant="body1">
-                      FLOOR: <strong>{u.fields.level}</strong>
-                    </Typography>
-                  </CardContent>
-                  <CardActions className={classes.cardActions}>
-                    <Button
-                      aria-label={`See more of unit ${u.fields.unit}`}
-                      className={classes.more}
-                      onClick={handleLocalStorage}
-                      component={Link}
-                      to={{
-                        pathname: `/unit/${
-                          u.fields.unit
-                        }/${u.fields.building.toLowerCase()}`,
-                        state: { level: u.fields.level },
-                      }}
-                      color="secondary"
-                      variant="contained"
-                    >
-                      See more
-                    </Button>
-                  </CardActions>
+              > */}
+              <Card className={classes.card}>
+                <CardContent className={classes.cardContent}>
+                  <Typography variant="body1">
+                    BUILDING:{" "}
+                    <strong>
+                      {u.fields.building === "A" ? "123 Street" : "133 Street"}
+                    </strong>
+                  </Typography>
+                  <Typography variant="body1">
+                    UNIT: <strong>{u.fields.unit}</strong>
+                  </Typography>
+                  <Typography variant="body1">
+                    SIZE: <strong>{u.fields.area}</strong>
+                  </Typography>
+                  <Typography variant="body1">
+                    BEDROOM:{" "}
+                    <strong>
+                      {u.fields.room === undefined ? "1" : u.fields.room}{" "}
+                      {u.fields.den > 0 && "+ den"}
+                    </strong>
+                  </Typography>
+                  <Typography variant="body1">
+                    FLOOR: <strong>{u.fields.level}</strong>
+                  </Typography>
+                </CardContent>
+                <CardActions className={classes.cardActions}>
+                  <Button
+                    aria-label={`See more of unit ${u.fields.unit}`}
+                    className={classes.more}
+                    onClick={handleLocalStorage}
+                    component={Link}
+                    to={{
+                      pathname: `/unit/${
+                        u.fields.unit
+                      }/${u.fields.building.toLowerCase()}`,
+                      state: { level: u.fields.level },
+                    }}
+                    color="secondary"
+                    variant="contained"
+                  >
+                    See more
+                  </Button>
+                </CardActions>
 
-                  <motion.figure layout style={{ margin: 0 }}>
-                    <CardMedia
-                      className={`${classes.media}`}
-                      image={
-                        u.fields.planpng &&
-                        u.fields.planpng[0].thumbnails.large.url
-                      }
-                      component={"img"}
-                      alt={`plan of ${u.fields.unit} unit`}
-                      title={`plan of ${u.fields.unit} unit`}
-                    />
-                  </motion.figure>
-                </Card>
-              </LazyLoad>
+                <motion.figure layout style={{ margin: 0 }}>
+                  <CardMedia
+                    className={`${classes.media}`}
+                    image={
+                      u.fields.planpng &&
+                      u.fields.planpng[0].thumbnails.large.url
+                    }
+                    component={"img"}
+                    alt={`plan of ${u.fields.unit} unit`}
+                    title={`plan of ${u.fields.unit} unit`}
+                  />
+                </motion.figure>
+              </Card>
+              {/*     </LazyLoad> */}
             </Grid>
           ))}
       </Grid>

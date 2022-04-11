@@ -1,9 +1,7 @@
-import React from "react";
-import { Container, Box, Button, Icon } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link, useParams, useLocation } from "react-router-dom";
-
+import { Box, Button, Container } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
   return (

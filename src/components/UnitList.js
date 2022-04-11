@@ -1,28 +1,21 @@
-import React from "react";
-import Units from "./Units";
-import { useState, useEffect } from "react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  CircularProgress,
+  Container,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import { motion } from "framer-motion";
-
-import {
-  Container,
-  Grid,
-  Card,
-  CardMedia,
-  Typography,
-  Button,
-  FormControl,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-  FormLabel,
-  TextField,
-  Box,
-  CircularProgress,
-} from "@material-ui/core";
-
-import Pagination from "@material-ui/lab/Pagination";
+import React, { useEffect, useState } from "react";
+import Units from "./Units";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -138,7 +131,6 @@ const UnitList = ({ combineUnits }) => {
   );
 
   const bedRooms = [{ roomsLabel: "1" }, { roomsLabel: "2" }];
-  const denDen = [{ denLabel: "1" }];
   const edifice = [{ buildingLabel: "A" }, { buildingLabel: "B" }];
   const SquareFeets = [
     { sqFtLabel: "600" },
@@ -283,40 +275,6 @@ const UnitList = ({ combineUnits }) => {
                   className={classes.form_label}
                   focused={false}
                 ></FormLabel>
-                <FormGroup className={classes.form_labelDen}>
-                  {denDen.map((d, i) => {
-                    return (
-                      <FormControlLabel
-                        key={i}
-                        control={
-                          <Checkbox
-                            disableRipple={true}
-                            classes={{
-                              root: classes.root,
-                              checked: classes.checked,
-                            }}
-                            icon={<span className={classes.icon} />}
-                            checkedIcon={
-                              <span className={classes.checkedIcon} />
-                            }
-                            onChange={(event) => {
-                              sessionStorage.clear();
-                              setDens((prev) =>
-                                event.target.checked
-                                  ? [...prev, d.denLabel]
-                                  : []
-                              );
-                            }}
-                            name={d.denLabel}
-                          />
-                        }
-                        label={d.denLabel && "+ DEN"}
-                        value={d.denLabel}
-                        checked={dens && dens.includes(d.denLabel) && true}
-                      />
-                    );
-                  })}
-                </FormGroup>
               </FormControl>
             </Grid>
             <Grid item sm={6} md={2}>
@@ -398,7 +356,7 @@ const UnitList = ({ combineUnits }) => {
                         />
                       }
                       label={
-                        e.buildingLabel === "A" ? "123 Bronte" : "133 Bronte"
+                        e.buildingLabel === "A" ? "123 Street" : "133 Street"
                       }
                       value={e.buildingLabel}
                       checked={

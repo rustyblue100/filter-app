@@ -1,20 +1,6 @@
-import React from "react";
-
-import {
-  Input,
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  FormControl,
-  Select,
-  InputLabel,
-  FormHelperText,
-  Radio,
-  RadioGroup,
-  Button,
-  Box,
-} from "@material-ui/core";
+import { Box, Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,11 +106,7 @@ const MaterialUiForm = () => {
     <div>
       <h3 className={classes.header_form}>Find out more</h3>
       <Box mt={-3}>
-        <form
-          autoComplete="on"
-          action="https://formsubmit.io/send/818dba04-fccd-44f4-a99c-50326fb1d489"
-          method="post"
-        >
+        <form autoComplete="on" action="" method="post">
           <Box display="flex">
             <TextField
               className={classes.formOutlines}
@@ -172,7 +154,7 @@ const MaterialUiForm = () => {
             multiline
             rows={6}
           />
-          <Button type="submit" fullWidth className={classes.submit}>
+          <Button disabled type="submit" fullWidth className={classes.submit}>
             Submit
           </Button>
         </form>
