@@ -172,7 +172,7 @@ const UnitList = ({ combineUnits }) => {
       : combineUnits;
 
   useEffect(() => {
-    window.onscroll = function () {
+    window.onscroll = function() {
       if (
         document.body.scrollTop > 1000 ||
         document.documentElement.scrollTop > 1000
@@ -391,7 +391,7 @@ const UnitList = ({ combineUnits }) => {
             <Container>
               {/*    <Pagination count={10} color="primary" /> */}
 
-              {Array.apply(null, { length: 15 }).map((i, el) => {
+              {Array.apply(null, { length: 15 }).map((_i, el) => {
                 return (
                   <Units
                     key={el}

@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Units from "./components/Units";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Airtable from "airtable";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Unit from "./components/Unit";
 import UnitList from "./components/UnitList";
-import Airtable from "airtable";
 
 const App = () => {
   const [combineUnits, setCombineUnits] = useState([]);
