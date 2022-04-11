@@ -1,12 +1,12 @@
 import { Button } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const Footer = () => {
   useEffect(() => {
     const top = document.getElementById("backtop");
 
-    window.onscroll = function () {
+    window.onscroll = function() {
       scrollFunction();
     };
 
